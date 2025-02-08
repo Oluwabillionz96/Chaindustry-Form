@@ -1,0 +1,40 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  height: 110vh;
+  overflow-x: hidden;
+  background: url("./assets/background-desktop.png");
+  background-repeat: no-repeat;
+  background-position: 0%;
+  background-size: 100% 100%;
+  color: white;
+  font-family: sans-serif;
+  padding: 0 0 3rem;
+}
+
+.flexs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.col {
+  flex-direction: column;
+}
+
+.jcs {
+  justify-content: start;
+}
+
+.ais {
+  align-items: start;
+}
+
+.abs {
+  position: absolute;
+}
