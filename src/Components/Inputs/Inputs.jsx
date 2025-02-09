@@ -1,4 +1,4 @@
-const Inputs = ({ type, name, id, value, placeholder }) => {
+const Inputs = ({ type, name, id, value, placeholder, max }) => {
   return (
     <>
       <input
@@ -8,6 +8,7 @@ const Inputs = ({ type, name, id, value, placeholder }) => {
         required
         value={value}
         placeholder={placeholder}
+        maxLength={max}
       />
     </>
   );

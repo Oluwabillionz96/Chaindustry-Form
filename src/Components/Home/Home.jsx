@@ -6,12 +6,29 @@ import Lines from "../../assets/pattern-lines.svg";
 import circle from "../../assets/pattern-circle.svg";
 import Inputs, { Label } from "../Inputs/Inputs";
 import "./home.css";
-import { First, Second } from "../InputFields/InputFields";
-const inputs = [<First />, <Second />];
+import {
+  Fifth,
+  First,
+  Fourth,
+  Last,
+  Second,
+  Sixth,
+  Third,
+} from "../InputFields/InputFields";
+const inputs = [
+  <First />,
+  <Second />,
+  <Third />,
+  <Fourth />,
+  <Fifth />,
+  <Sixth />,
+  <Last />,
+];
 
 const Home = () => {
-  let next, setNext;
-  [next, setNext] = useState(0);
+  const [next, setNext] = useState(0);
+  const isEqual = next === inputs.length - 1;
+  const lesser = next === 0;
 
   return (
     <main>
@@ -34,6 +51,7 @@ const Home = () => {
               e.preventDefault();
               setNext(next - 1);
             }}
+            disabled={lesser}
           >
             <i className="fa fa-arrow-left" aria-hidden="true"></i>
           </button>
@@ -42,6 +60,7 @@ const Home = () => {
               e.preventDefault();
               setNext(next + 1);
             }}
+            disabled={isEqual}
           >
             <i className="fa fa-arrow-right" aria-hidden="true"></i>
           </button>

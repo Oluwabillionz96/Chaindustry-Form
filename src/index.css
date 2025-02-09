@@ -38,3 +38,11 @@ body {
 .abs {
   position: absolute;
 }
+
+button:hover {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
