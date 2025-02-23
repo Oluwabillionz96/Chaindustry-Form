@@ -8,7 +8,9 @@ export const EmailAndName = ({
   value1,
   value2,
   reff1,
-  reff2
+  reff2,
+  press1,
+  press2,
 }) => {
   return (
     <>
@@ -21,10 +23,9 @@ export const EmailAndName = ({
           placeholder={"example@gmail.com"}
           onChange={onChange1}
           value={value1}
+          handleKeypress={press1}
         />
-        <p className="emp" ref={reff1}>
-          
-        </p>
+        <p className="emp" ref={reff1}></p>
       </div>
       <div className="flexs col ais" style={{ gap: "0.5rem" }}>
         <Label id={"name"} name={"Full Name"} />
@@ -35,16 +36,15 @@ export const EmailAndName = ({
           placeholder={"John Doe"}
           onChange={onChange2}
           value={value2}
+          handleKeypress={press2}
         />
-        <p className="emp" ref={reff2}>
-          
-        </p>
+        <p className="emp" ref={reff2}></p>
       </div>
     </>
   );
 };
 
-export function Second() {
+export function PhoneAndPhoneNumber({ onChange1, onChange2, check }) {
   return (
     <>
       <fieldset className="flexs jcs" style={{ gap: "2rem" }}>
@@ -55,11 +55,19 @@ export function Second() {
             name={"Phone?"}
             id={"YesPhone"}
             value={"Yes"}
+            onChange={onChange1}
+            check={check}
           />
           <Label id={"yesPhone"} name={"Yes"} />
         </div>
         <div className="flexs" style={{ gap: "1rem" }}>
-          <Inputs type={"radio"} name={"Phone?"} id={"NoPhone"} value={"No"} />
+          <Inputs
+            type={"radio"}
+            name={"Phone?"}
+            id={"NoPhone"}
+            value={"No"}
+            onChange={onChange2}
+          />
           <Label id={"NoPhone"} name={"No"} />
         </div>
       </fieldset>

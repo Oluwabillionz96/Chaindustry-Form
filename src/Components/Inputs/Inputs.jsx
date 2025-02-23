@@ -1,4 +1,15 @@
-const Inputs = ({ type, name, id, value, placeholder, max, ref, onChange }) => {
+const Inputs = ({
+  type,
+  name,
+  id,
+  value,
+  placeholder,
+  max,
+  ref,
+  onChange,
+  handleKeypress,
+  check,
+}) => {
   return (
     <>
       <input
@@ -11,6 +22,8 @@ const Inputs = ({ type, name, id, value, placeholder, max, ref, onChange }) => {
         maxLength={max}
         ref={ref}
         onChange={onChange}
+        onKeyDown={handleKeypress}
+        defaultChecked={check}
       />
     </>
   );

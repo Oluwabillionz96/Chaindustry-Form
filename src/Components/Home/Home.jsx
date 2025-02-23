@@ -6,7 +6,7 @@ import {
   Fifth,
   Fourth,
   Last,
-  Second,
+  PhoneAndPhoneNumber,
   Sixth,
   Third,
 } from "../InputFields/InputFields";
@@ -14,24 +14,50 @@ import Absolute from "../Absolutes/Absolute";
 import { move } from "../Movements/movement";
 
 const Home = () => {
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
+  const [userInfo, setUserInfo] = useState({
+    name: "",
+    email: "",
+    phone: true,
+    phoneNumber: 0,
+  });
   const hidden1 = useRef(null);
   const hidden2 = useRef(null);
   const inputs = [
     <EmailAndName
       onChange1={(e) => {
-        setEmail(e.target.value);
+        setUserInfo({
+          ...userInfo,
+          email: e.target.value,
+        });
       }}
-      value1={email}
+      value1={userInfo.email}
       onChange2={(e) => {
-        setName(e.target.value);
+        setUserInfo({
+          ...userInfo,
+          name: e.target.value,
+        });
       }}
-      value2={name}
+      value2={userInfo.name}
       reff1={hidden1}
       reff2={hidden2}
+      press1={() => {
+        hidden1.current.style.display = "none";
+      }}
+      press2={() => {
+        hidden2.current.style.display = "none";
+      }}
     />,
-    <Second />,
+    <PhoneAndPhoneNumber
+      check={userInfo.phone}
+      onChange1={(e) => {
+        setUserInfo({ ...userInfo, phone: false });
+        console.log(e.target.value);
+      }}
+      onChange2={(e) => {
+        setUserInfo({ ...userInfo, phone: false });
+        console.log(e.target.value);
+      }}
+    />,
     <Third />,
     <Fourth />,
     <Fifth />,
@@ -70,8 +96,9 @@ const Home = () => {
           <button
             onClick={(e) => {
               e.preventDefault();
-              move[0](hidden1, hidden2, email, name) &&
+              move[0](hidden1, hidden2, userInfo.email, userInfo.name) &&
                 setNext((next) => next + 1);
+              console.log(userInfo);
             }}
             disabled={isEqual}
           >
