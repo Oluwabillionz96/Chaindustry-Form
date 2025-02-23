@@ -18,16 +18,17 @@ const Home = () => {
     name: "",
     email: "",
     phone: true,
-    phoneNumber: 0,
+    phoneNumber: "",
   });
   const hidden1 = useRef(null);
   const hidden2 = useRef(null);
+  const hiddenn = useRef(null);
   const inputs = [
     <EmailAndName
       onChange1={(e) => {
         setUserInfo({
           ...userInfo,
-          email: e.target.value,
+          email: e.target.value.toLowerCase(),
         });
       }}
       value1={userInfo.email}
@@ -48,14 +49,20 @@ const Home = () => {
       }}
     />,
     <PhoneAndPhoneNumber
+      reff={hiddenn}
       check={userInfo.phone}
       onChange1={(e) => {
         setUserInfo({ ...userInfo, phone: false });
-        console.log(e.target.value);
       }}
       onChange2={(e) => {
         setUserInfo({ ...userInfo, phone: false });
-        console.log(e.target.value);
+      }}
+      value1={userInfo.phoneNumber}
+      onChange3={(e) => {
+        setUserInfo({ ...userInfo, phoneNumber: e.target.value });
+      }}
+      press={() => {
+        hiddenn.current.style.display = "none";
       }}
     />,
     <Third />,
@@ -67,6 +74,10 @@ const Home = () => {
   const [next, setNext] = useState(0);
   const isEqual = next === inputs.length - 1;
   const lesser = next === 0;
+  const argu = [
+    [hidden1, hidden2, userInfo.email, userInfo.name],
+    [hiddenn, userInfo.phoneNumber],
+  ];
 
   return (
     <main>
@@ -96,8 +107,7 @@ const Home = () => {
           <button
             onClick={(e) => {
               e.preventDefault();
-              move[0](hidden1, hidden2, userInfo.email, userInfo.name) &&
-                setNext((next) => next + 1);
+              move[next](argu[next]) && setNext((next) => next + 1);
               console.log(userInfo);
             }}
             disabled={isEqual}

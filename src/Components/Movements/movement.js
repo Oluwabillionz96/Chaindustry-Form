@@ -8,32 +8,40 @@ function empty(value, toggle, reff, content) {
   }
   return toggle;
 }
-
+// h1, h2, value1, value2;
 export const move = [
-  function (h1, h2, value1, value2) {
+  function (arr) {
     let movement = false;
     if (
-      empty(value1, movement, h1, "Field must not be empty") &&
-      empty(value2, movement, h2, "Field must not be empty")
+      empty(arr[2], movement, arr[0], "Field must not be empty") &&
+      empty(arr[3], movement, arr[1], "Field must not be empty")
     ) {
       if (
-        value1.includes("@") &&
-        value1.includes(".com") &&
-        !value1.includes(" ")
+        arr[2].includes("@") &&
+        arr[2].includes(".com") &&
+        !arr[2].includes(" ")
       ) {
         movement = true;
       } else {
         movement = false;
-        h1.current.textContent = "Email must be valid";
-        h1.current.style.display = "block";
+        arr[0].current.textContent = "Email must be valid";
+        arr[0].current.style.display = "block";
       }
     }
 
     return movement;
   },
-  function ({ value }) {
+  function (arr) {
     let movement = false;
-    empty(value, movement, h1, "Field must not be empty");
+    if (
+      empty(arr[1], movement, arr[0], "Field must not be empty")
+    ) {
+        if (arr[1].length === 11) {
+          movement = true
+        } else {
+            arr[0].current.textContent = 'Numbers must not be greater or lesser than 11 digits'
+      }
+    }
     return movement;
   },
 ];

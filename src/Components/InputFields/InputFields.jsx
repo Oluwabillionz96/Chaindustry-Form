@@ -44,7 +44,15 @@ export const EmailAndName = ({
   );
 };
 
-export function PhoneAndPhoneNumber({ onChange1, onChange2, check }) {
+export function PhoneAndPhoneNumber({
+  onChange1,
+  onChange2,
+  check,
+  value1,
+  onChange3,
+  reff,
+  press,
+}) {
   return (
     <>
       <fieldset className="flexs jcs" style={{ gap: "2rem" }}>
@@ -79,7 +87,11 @@ export function PhoneAndPhoneNumber({ onChange1, onChange2, check }) {
           id={"number"}
           placeholder={"07012345678"}
           max={11}
+          value={value1}
+          onChange={onChange3}
+          handleKeypress={press}
         />
+        <p className="emp" ref={reff}></p>
       </div>
     </>
   );
