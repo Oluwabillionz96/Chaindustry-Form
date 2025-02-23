@@ -60,6 +60,7 @@ form .flexs button {
   border: none;
   color: #291451;
   background-color: #e25f81;
+  margin-top: 3rem;
 }
 
 form .flexs button:disabled {
@@ -67,7 +68,7 @@ form .flexs button:disabled {
 }
 
 main .squiggly-bottom {
-  bottom: 0;
+  bottom: -8.6rem;
   z-index: -1;
 }
 
@@ -106,4 +107,30 @@ input[type="checkbox"] {
 
 input[type="file"] {
   border: none;
+  display: none;
+}
+
+.upload {
+  width: 38.625rem;
+  height: 10rem;
+  border: 2px dashed white;
+}
+
+.upload-icon {
+  width: fit-content;
+  padding: 0.5rem;
+  background-color: #4b486a;
+  margin: 1rem auto;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.drag-and-drop {
+  color: hsl(252, 6%, 83%);
+  text-align: center;
+}
+
+.emp {
+  color: rgb(250, 89, 89);
+  display: none;
 }

@@ -1,4 +1,4 @@
-const Inputs = ({ type, name, id, value, placeholder, max }) => {
+const Inputs = ({ type, name, id, value, placeholder, max, ref, onChange }) => {
   return (
     <>
       <input
@@ -9,6 +9,8 @@ const Inputs = ({ type, name, id, value, placeholder, max }) => {
         value={value}
         placeholder={placeholder}
         maxLength={max}
+        ref={ref}
+        onChange={onChange}
       />
     </>
   );

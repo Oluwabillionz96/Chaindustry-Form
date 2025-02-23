@@ -1,31 +1,43 @@
-import { useState } from "react";
+import { useState, useRef, use } from "react";
 import logo from "../../assets/logo.svg";
-import patternBottom from "../../assets/pattern-squiggly-line-bottom.svg";
-import patternTop from "../../assets/pattern-squiggly-line-Top.svg";
-import Lines from "../../assets/pattern-lines.svg";
-import circle from "../../assets/pattern-circle.svg";
-import Inputs, { Label } from "../Inputs/Inputs";
 import "./home.css";
 import {
+  EmailAndName,
   Fifth,
-  First,
   Fourth,
   Last,
   Second,
   Sixth,
   Third,
 } from "../InputFields/InputFields";
-const inputs = [
-  <First />,
-  <Second />,
-  <Third />,
-  <Fourth />,
-  <Fifth />,
-  <Sixth />,
-  <Last />,
-];
+import Absolute from "../Absolutes/Absolute";
+import { move } from "../Movements/movement";
 
 const Home = () => {
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const hidden1 = useRef(null);
+  const hidden2 = useRef(null);
+  const inputs = [
+    <EmailAndName
+      onChange1={(e) => {
+        setEmail(e.target.value);
+      }}
+      value1={email}
+      onChange2={(e) => {
+        setName(e.target.value);
+      }}
+      value2={name}
+      reff1={hidden1}
+      reff2={hidden2}
+    />,
+    <Second />,
+    <Third />,
+    <Fourth />,
+    <Fifth />,
+    <Sixth />,
+    <Last />,
+  ];
   const [next, setNext] = useState(0);
   const isEqual = next === inputs.length - 1;
   const lesser = next === 0;
@@ -58,7 +70,8 @@ const Home = () => {
           <button
             onClick={(e) => {
               e.preventDefault();
-              setNext(next + 1);
+              move[0](hidden1, hidden2, email, name) &&
+                setNext((next) => next + 1);
             }}
             disabled={isEqual}
           >
@@ -66,21 +79,7 @@ const Home = () => {
           </button>
         </div>
       </form>
-      <div className="abs squiggly-bottom">
-        <img src={patternBottom} alt="squiggly pattern bottom" />
-      </div>
-      <div className="abs squiggly-top">
-        <img src={patternTop} alt="squiggly pattern top" />
-      </div>
-      <div className="abs lines">
-        <img src={Lines} alt="lines" />
-      </div>
-      <div className="abs circle-top">
-        <img src={circle} alt="circular pattern" />
-      </div>
-      <div className="abs circle-mid">
-        <img src={circle} alt="circular pattern" />
-      </div>
+      <Absolute />
     </main>
   );
 };

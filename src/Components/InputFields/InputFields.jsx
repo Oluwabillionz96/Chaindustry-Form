@@ -1,6 +1,15 @@
 import Inputs, { Label } from "../Inputs/Inputs";
+import uploadIcon from "../../assets/icon-upload.svg";
+import { useRef, useState } from "react";
 
-export const First = () => {
+export const EmailAndName = ({
+  onChange1,
+  onChange2,
+  value1,
+  value2,
+  reff1,
+  reff2
+}) => {
   return (
     <>
       <div className="flexs col ais " style={{ gap: "0.5rem" }}>
@@ -10,7 +19,12 @@ export const First = () => {
           name={"email"}
           id={"email"}
           placeholder={"example@gmail.com"}
+          onChange={onChange1}
+          value={value1}
         />
+        <p className="emp" ref={reff1}>
+          
+        </p>
       </div>
       <div className="flexs col ais" style={{ gap: "0.5rem" }}>
         <Label id={"name"} name={"Full Name"} />
@@ -19,7 +33,12 @@ export const First = () => {
           name={"name"}
           id={"name"}
           placeholder={"John Doe"}
+          onChange={onChange2}
+          value={value2}
         />
+        <p className="emp" ref={reff2}>
+          
+        </p>
       </div>
     </>
   );
@@ -259,6 +278,21 @@ export function Sixth() {
   );
 }
 export function Last() {
+  const [upload, setUpload] = useState("");
+  const fileUpload = useRef(null);
+  const [preview, setPreview] = useState(null);
+  function handleClick() {
+    if (fileUpload.current) {
+      fileUpload.current.click();
+    }
+  }
+
+  function handleFileChange(file) {
+    if (file) {
+      setUpload(file.name);
+      setPreview(URL.createObjectURL(file));
+    }
+  }
   return (
     <>
       <fieldset className="flexs jcs" style={{ gap: "2rem" }}>
@@ -285,7 +319,50 @@ export function Last() {
           id={"dashboard"}
           name={"upload a screenshot of your Chaindustry account Dashboard"}
         />
-        <Inputs type={"file"} name={"chaindustry-dashBoard"} id={"dashboard"} />
+        <Inputs
+          type={"file"}
+          name={"chaindustry-dashBoard"}
+          id={"dashboard"}
+          ref={fileUpload}
+          onChange={(e) => {
+            handleFileChange(e.target.files[0]);
+          }}
+        />
+        <div
+          className="upload"
+          onDragOver={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            e.dataTransfer.dropEffect = "copy";
+          }}
+          onDrop={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            if (e.dataTransfer.files.length > 0) {
+              handleFileChange(e.dataTransfer.files[0]);
+            }
+          }}
+          onClick={() => {
+            handleClick();
+          }}
+        >
+          <div className="upload-icon">
+            <img src={uploadIcon} alt="upload icon" />
+          </div>
+          <p className="drag-and-drop">Drag and drop or click to upload</p>
+        </div>
+        {preview && (
+          <img
+            src={preview}
+            alt="Uploaded Preview"
+            style={{
+              marginTop: "1rem",
+              width: "150px",
+              height: "auto",
+              borderRadius: "8px",
+            }}
+          />
+        )}
       </div>
     </>
   );
