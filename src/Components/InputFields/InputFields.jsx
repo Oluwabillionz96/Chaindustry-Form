@@ -48,6 +48,7 @@ export function PhoneAndPhoneNumber({
   onChange1,
   onChange2,
   check,
+  check2,
   value1,
   onChange3,
   reff,
@@ -75,6 +76,7 @@ export function PhoneAndPhoneNumber({
             id={"NoPhone"}
             value={"No"}
             onChange={onChange2}
+            check={check2}
           />
           <Label id={"NoPhone"} name={"No"} />
         </div>
@@ -97,7 +99,16 @@ export function PhoneAndPhoneNumber({
   );
 }
 
-export function Third() {
+export function WhatsappAndTelegram({
+  value1,
+  onChange1,
+  press1,
+  reff1,
+  onChange2,
+  value2,
+  press2,
+  reff2,
+}) {
   return (
     <>
       <div className="flexs col ais " style={{ gap: "0.5rem" }}>
@@ -108,7 +119,11 @@ export function Third() {
           id={"whatsapp-number"}
           placeholder={"07012345678"}
           max={11}
+          value={value1}
+          onChange={onChange1}
+          handleKeypress={press1}
         />
+        <p className="emp" ref={reff1}></p>
       </div>
       <div className="flexs col ais" style={{ gap: "0.5rem" }}>
         <Label id={"telegram"} name={"Telegram Username"} />
@@ -117,13 +132,30 @@ export function Third() {
           name={"telegram"}
           id={"telegram"}
           placeholder={"@username"}
+          value={value2}
+          onChange={onChange2}
+          handleKeypress={press2}
         />
+        <p className="emp" ref={reff2}></p>
       </div>
     </>
   );
 }
 
-export function Fourth() {
+export function LaptopAndComputerLiteracy({
+  onChange1,
+  check1,
+  onChange2,
+  check2,
+  onChange3,
+  onChange4,
+  onChange5,
+  onChange6,
+  check3,
+  check4,
+  check5,
+  check6,
+}) {
   return (
     <>
       <fieldset className="flexs jcs" style={{ gap: "2rem" }}>
@@ -134,6 +166,8 @@ export function Fourth() {
             name={"laptop?"}
             id={"YesLaptop"}
             value={"Yes"}
+            onChange={onChange1}
+            check={check1}
           />
           <Label id={"yesLaptop"} name={"Yes"} />
         </div>
@@ -143,6 +177,8 @@ export function Fourth() {
             name={"laptop?"}
             id={"NoLaptop"}
             value={"No"}
+            onChange={onChange2}
+            check={check2}
           />
           <Label id={"NoLaptop"} name={"No"} />
         </div>
@@ -155,6 +191,8 @@ export function Fourth() {
             name={"Computer-Literacy"}
             id={"isNovice"}
             value={"Novice"}
+            onChange={onChange3}
+            check={check3}
           />
           <Label id={"isNovice"} name={"Novice"} />
         </div>
@@ -164,6 +202,8 @@ export function Fourth() {
             name={"Computer-Literacy"}
             id={"isBasic"}
             value={"Basic Level"}
+            onChange={onChange4}
+            check={check4}
           />
           <Label id={"isBasic"} name={"Basic Level"} />
         </div>
@@ -173,6 +213,8 @@ export function Fourth() {
             name={"Computer-Literacy"}
             id={"isMid"}
             value={"Mid-level"}
+            onChange={onChange5}
+            check={check5}
           />
           <Label id={"isMid"} name={"Mid-Level"} />
         </div>
@@ -182,6 +224,8 @@ export function Fourth() {
             name={"Computer-Literacy"}
             id={"isExpert"}
             value={"Expert"}
+            onChange={onChange6}
+            check={check6}
           />
           <Label id={"isExpert"} name={"Expert"} />
         </div>
@@ -189,7 +233,20 @@ export function Fourth() {
     </>
   );
 }
-export function Fifth() {
+export function SocialMediaExposureAndSite({
+  onChange1,
+  onChange2,
+  onChange3,
+  onChange4,
+  onChange5,
+  onChange6,
+  check1,
+  check2,
+  check3,
+  check4,
+  check5,
+  check6,
+}) {
   return (
     <>
       <fieldset className="flexs jcs" style={{ gap: "1.5rem" }}>
@@ -200,6 +257,8 @@ export function Fifth() {
             name={"internet-exposure-level"}
             id={"isNovice"}
             value={"Novice"}
+            onChange={onChange1}
+            check={check1}
           />
           <Label id={"isNovice"} name={"Novice"} />
         </div>
@@ -209,6 +268,8 @@ export function Fifth() {
             name={"internet-exposure-level"}
             id={"isBasic"}
             value={"Basic Level"}
+            onChange={onChange2}
+            check={check2}
           />
           <Label id={"isBasic"} name={"Basic Level"} />
         </div>
@@ -218,6 +279,8 @@ export function Fifth() {
             name={"internet-exposure-level"}
             id={"isMid"}
             value={"Mid-level"}
+            onChange={onChange3}
+            check={check3}
           />
           <Label id={"isMid"} name={"Mid-Level"} />
         </div>
@@ -227,6 +290,8 @@ export function Fifth() {
             name={"internet-exposure-level"}
             id={"isExpert"}
             value={"Expert"}
+            onChange={onChange4}
+            check={check4}
           />
           <Label id={"isExpert"} name={"Expert"} />
         </div>
@@ -239,6 +304,8 @@ export function Fifth() {
             name={"site-prefrence"}
             id={"onsite"}
             value={"Onsite"}
+            onChange={onChange5}
+            check={check5}
           />
           <Label id={"onsite"} name={"Onsite"} />
         </div>
@@ -248,6 +315,8 @@ export function Fifth() {
             name={"site-prefrence"}
             id={"online"}
             value={"Online"}
+            onChange={onChange6}
+            check={check6}
           />
           <Label id={"online"} name={"Online"} />
         </div>
@@ -263,7 +332,7 @@ function CheckBoxes({ name, id }) {
     </div>
   );
 }
-export function Sixth() {
+export function MasterClasses() {
   return (
     <>
       <div

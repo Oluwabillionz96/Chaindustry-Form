@@ -1,41 +1,53 @@
-import { useState, useRef, use } from "react";
+import { useState, useRef } from "react";
 import logo from "../../assets/logo.svg";
 import "./home.css";
 import {
+  LaptopAndComputerLiteracy,
   EmailAndName,
-  Fifth,
-  Fourth,
   Last,
   PhoneAndPhoneNumber,
-  Sixth,
-  Third,
+  MasterClasses,
+  WhatsappAndTelegram,
+  SocialMediaExposureAndSite,
 } from "../InputFields/InputFields";
 import Absolute from "../Absolutes/Absolute";
 import { move } from "../Movements/movement";
+
+function changeTo(e) {
+  return e.target.value;
+}
 
 const Home = () => {
   const [userInfo, setUserInfo] = useState({
     name: "",
     email: "",
-    phone: true,
+    phone: "Yes",
     phoneNumber: "",
+    whatsappNumber: "",
+    telegram: "",
+    laptop: "Yes",
+    computerLiteracyLevel: "Basic Level",
+    SocialMediaExposure: "Basic Level",
+    site: "Onsite",
   });
   const hidden1 = useRef(null);
   const hidden2 = useRef(null);
-  const hiddenn = useRef(null);
+  const hidden3 = useRef(null);
+  const hidden4 = useRef(null);
+  const hidden5 = useRef(null);
   const inputs = [
     <EmailAndName
       onChange1={(e) => {
         setUserInfo({
           ...userInfo,
-          email: e.target.value.toLowerCase(),
+          email: changeTo(e).toLowerCase(),
         });
       }}
       value1={userInfo.email}
       onChange2={(e) => {
         setUserInfo({
           ...userInfo,
-          name: e.target.value,
+          name: changeTo(e),
         });
       }}
       value2={userInfo.name}
@@ -49,26 +61,94 @@ const Home = () => {
       }}
     />,
     <PhoneAndPhoneNumber
-      reff={hiddenn}
-      check={userInfo.phone}
+      reff={hidden3}
+      check={userInfo.phone === "Yes"}
+      check2={userInfo.phone === "No"}
       onChange1={(e) => {
-        setUserInfo({ ...userInfo, phone: false });
+        setUserInfo({ ...userInfo, phone: changeTo(e) });
       }}
       onChange2={(e) => {
-        setUserInfo({ ...userInfo, phone: false });
+        setUserInfo({ ...userInfo, phone: changeTo(e) });
       }}
       value1={userInfo.phoneNumber}
       onChange3={(e) => {
-        setUserInfo({ ...userInfo, phoneNumber: e.target.value });
+        setUserInfo({ ...userInfo, phoneNumber: changeTo(e) });
       }}
       press={() => {
-        hiddenn.current.style.display = "none";
+        hidden3.current.style.display = "none";
       }}
     />,
-    <Third />,
-    <Fourth />,
-    <Fifth />,
-    <Sixth />,
+    <WhatsappAndTelegram
+      reff1={hidden4}
+      reff2={hidden5}
+      onChange1={(e) => {
+        setUserInfo({ ...userInfo, whatsappNumber: changeTo(e) });
+      }}
+      onChange2={(e) => {
+        setUserInfo({ ...userInfo, telegram: changeTo(e) });
+      }}
+      press1={() => {
+        hidden4.current.style.display = "none";
+      }}
+      press2={() => {
+        hidden5.current.style.display = "none";
+      }}
+      value1={userInfo.whatsappNumber}
+      value2={userInfo.telegram}
+    />,
+    <LaptopAndComputerLiteracy
+      check1={userInfo.laptop === "Yes"}
+      check2={userInfo.laptop === "No"}
+      check3={userInfo.computerLiteracyLevel === "Novice"}
+      check4={userInfo.computerLiteracyLevel === "Basic Level"}
+      check5={userInfo.computerLiteracyLevel === "Mid-level"}
+      check6={userInfo.computerLiteracyLevel === "Expert"}
+      onChange1={(e) => {
+        setUserInfo({ ...userInfo, laptop: changeTo(e) });
+      }}
+      onChange2={(e) => {
+        setUserInfo({ ...userInfo, laptop: changeTo(e) });
+      }}
+      onChange3={(e) => {
+        setUserInfo({ ...userInfo, computerLiteracyLevel: changeTo(e) });
+      }}
+      onChange4={(e) => {
+        setUserInfo({ ...userInfo, computerLiteracyLevel: changeTo(e) });
+      }}
+      onChange5={(e) => {
+        setUserInfo({ ...userInfo, computerLiteracyLevel: changeTo(e) });
+      }}
+      onChange6={(e) => {
+        setUserInfo({ ...userInfo, computerLiteracyLevel: changeTo(e) });
+      }}
+    />,
+    <SocialMediaExposureAndSite
+      check1={userInfo.SocialMediaExposure === "Novice"}
+      check2={userInfo.SocialMediaExposure === "Basic Level"}
+      check3={userInfo.SocialMediaExposure === "Mid-level"}
+      check4={userInfo.SocialMediaExposure === "Expert"}
+      check5={userInfo.site === "Onsite"}
+      check6={userInfo.site === "Online"}
+      onChange1={(e) => {
+        setUserInfo({ ...userInfo, SocialMediaExposure: changeTo(e) });
+      }}
+      onChange2={(e) => {
+        setUserInfo({ ...userInfo, SocialMediaExposure: changeTo(e) });
+      }}
+      onChange3={(e) => {
+        setUserInfo({ ...userInfo, SocialMediaExposure: changeTo(e) });
+      }}
+      onChange4={(e) => {
+        setUserInfo({ ...userInfo, SocialMediaExposure: changeTo(e) });
+      }}
+      onChange5={(e) => {
+        setUserInfo({ ...userInfo, site: changeTo(e) });
+      }}
+      onChange6={(e) => {
+        setUserInfo({ ...userInfo, site: changeTo(e) });
+      }}
+    />,
+    <MasterClasses />,
     <Last />,
   ];
   const [next, setNext] = useState(0);
@@ -76,7 +156,10 @@ const Home = () => {
   const lesser = next === 0;
   const argu = [
     [hidden1, hidden2, userInfo.email, userInfo.name],
-    [hiddenn, userInfo.phoneNumber],
+    [hidden3, userInfo.phoneNumber],
+    [userInfo.whatsappNumber, hidden4, userInfo.telegram, hidden5],
+    [],
+    [],
   ];
 
   return (

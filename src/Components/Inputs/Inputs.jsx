@@ -23,7 +23,7 @@ const Inputs = ({
         ref={ref}
         onChange={onChange}
         onKeyDown={handleKeypress}
-        defaultChecked={check}
+        checked={check}
       />
     </>
   );
