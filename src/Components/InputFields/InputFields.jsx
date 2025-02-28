@@ -1,7 +1,24 @@
 import Inputs, { Label } from "../Inputs/Inputs";
 import uploadIcon from "../../assets/icon-upload.svg";
 import { useRef, useState } from "react";
+import { Link } from "react-router-dom";
 
+const masterClasses = [
+  [
+    { name: "Blogging and SEO", id: "Blogging-and-SEO" },
+    { name: "Data Ananlysis", id: "Data-Ananlysis" },
+    { name: "Video Editing", id: "Video-Editing" },
+    {
+      name: "BlockChain and Web Developemnt",
+      id: "BlockChain-and-Web-Developemnt",
+    },
+  ],
+  [
+    { name: "Trading and Investment", id: "Trading-and-Investment" },
+    { name: "UI/UX and Graphics Design", id: "UI/UX-and-Graphics-Design" },
+    { name: "Web2/Web3 Digital Marketing", id: "Web2/Web3-Digital Marketing" },
+  ],
+];
 export const EmailAndName = ({
   onChange1,
   onChange2,
@@ -324,15 +341,22 @@ export function SocialMediaExposureAndSite({
     </>
   );
 }
-function CheckBoxes({ name, id }) {
+function CheckBoxes({ name, id, onChange, check, value }) {
   return (
     <div className="flexs jcs checkBox" style={{ gap: "0.5rem" }}>
-      <Inputs type={"checkbox"} name={name} id={id} value={name} />
+      <Inputs
+        type={"checkbox"}
+        name={name}
+        id={id}
+        value={value}
+        onChange={onChange}
+        check={check}
+      />
       <Label id={id} name={name} />
     </div>
   );
 }
-export function MasterClasses() {
+export function MasterClasses({ arr, onChange, reff }) {
   return (
     <>
       <div
@@ -340,51 +364,68 @@ export function MasterClasses() {
         style={{ justifyContent: "space-around", width: "80%" }}
       >
         <div className="flexs col ais">
-          <CheckBoxes name={"Blogging and SEO"} id={"Blogging-and-SEO"} />
-          <CheckBoxes name={"Data Ananlysis"} id={"Data-Ananlysis"} />
-          <CheckBoxes name={"Video Editing"} id={"Video Editing"} />
-          <CheckBoxes
-            name={"BlockChain and Web Developemnt"}
-            id={"BlockChain-and-Web-Developemnt"}
-          />
+          <ul style={{ listStyle: "none" }}>
+            {masterClasses[0].map((classes) => {
+              return (
+                <li key={classes.id}>
+                  <CheckBoxes
+                    name={classes.name}
+                    id={classes.id}
+                    value={classes.name}
+                    check={arr.includes(classes.name)}
+                    onChange={onChange}
+                  />
+                </li>
+              );
+            })}
+          </ul>
         </div>
         <div className="flexs col ais">
-          <CheckBoxes
-            name={"Trading and Investment"}
-            id={"Trading-and-Investment"}
-          />
-          <CheckBoxes
-            name={"Web2/Web3 Digital Marketing"}
-            id={"Web2/Web3-Digital Marketing"}
-          />
-          <CheckBoxes
-            name={"UI/UX and Graphics Design"}
-            id={"UI/UX-and-Graphics-Design"}
-          />
+          <ul style={{ listStyle: "none" }}>
+            {masterClasses[1].map((classes) => {
+              return (
+                <li key={classes.id}>
+                  <CheckBoxes
+                    name={classes.name}
+                    id={classes.id}
+                    value={classes.name}
+                    check={arr.includes(classes.name)}
+                    onChange={onChange}
+                  />
+                </li>
+              );
+            })}
+          </ul>
+          <p className="emp" ref={reff}></p>
         </div>
       </div>
     </>
   );
 }
-export function Last() {
-  const [upload, setUpload] = useState("");
+export function Upload({
+  onChange1,
+  onChange2,
+  onChange3,
+  check1,
+  check2,
+  value1,
+  loader,
+}) {
   const fileUpload = useRef(null);
-  const [preview, setPreview] = useState(null);
   function handleClick() {
     if (fileUpload.current) {
       fileUpload.current.click();
     }
   }
 
-  function handleFileChange(file) {
-    if (file) {
-      setUpload(file.name);
-      setPreview(URL.createObjectURL(file));
-    }
+  function handleFileChange(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    console.log(file);
   }
   return (
     <>
-      <fieldset className="flexs jcs" style={{ gap: "2rem" }}>
+      <fieldset className="flexs jcs last" style={{ gap: "2rem" }}>
         <legend>
           Are you willing to pay the tuition fee of $200 when you start earning
           during and after your training?
@@ -395,15 +436,27 @@ export function Last() {
             name={"pay$200?"}
             id={"Yespay"}
             value={"Yes"}
+            onChange={onChange1}
+            check={check1}
           />
           <Label id={"yespay"} name={"Yes"} />
         </div>
         <div className="flexs" style={{ gap: "1rem" }}>
-          <Inputs type={"radio"} name={"pay$200?"} id={"NoPay"} value={"No"} />
+          <Inputs
+            type={"radio"}
+            name={"pay$200?"}
+            id={"NoPay"}
+            value={"No"}
+            onChange={onChange2}
+            check={check2}
+          />
           <Label id={"NoPay"} name={"No"} />
         </div>
       </fieldset>
-      <div className="flexs col ais" style={{ gap: "0.5rem" }}>
+      <div
+        className="flexs col ais"
+        style={{ gap: "0.5rem", marginTop: "0.4rem" }}
+      >
         <Label
           id={"dashboard"}
           name={"upload a screenshot of your Chaindustry account Dashboard"}
@@ -413,45 +466,35 @@ export function Last() {
           name={"chaindustry-dashBoard"}
           id={"dashboard"}
           ref={fileUpload}
-          onChange={(e) => {
-            handleFileChange(e.target.files[0]);
-          }}
+          onChange={onChange3}
         />
         <div
           className="upload"
-          onDragOver={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            e.dataTransfer.dropEffect = "copy";
-          }}
-          onDrop={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            if (e.dataTransfer.files.length > 0) {
-              handleFileChange(e.dataTransfer.files[0]);
-            }
-          }}
           onClick={() => {
             handleClick();
           }}
+          style={{ position: "relative" }}
         >
-          <div className="upload-icon">
-            <img src={uploadIcon} alt="upload icon" />
+          <div className={value1 ? "uploaded-image" : "upload-icon"}>
+            {loader ? (
+              "Uploading..."
+            ) : (
+              <a href={value1 ? value1 : null} target={value1 && "blank"}>
+                <img
+                  src={value1 ? value1 : uploadIcon}
+                  alt={value1 ? "uploaded image" : "upload icon"}
+                  onClick={(e) => {
+                    value1 && e.stopPropagation();
+                  }}
+                />
+              </a>
+            )}
           </div>
-          <p className="drag-and-drop">Drag and drop or click to upload</p>
+          <p className="drag-and-drop" style={{ display: value1 && "none" }}>
+            Drag and drop or click to upload
+          </p>
         </div>
-        {preview && (
-          <img
-            src={preview}
-            alt="Uploaded Preview"
-            style={{
-              marginTop: "1rem",
-              width: "150px",
-              height: "auto",
-              borderRadius: "8px",
-            }}
-          />
-        )}
+        <Link to="/account"> What is a ChaindustryAccount?</Link>
       </div>
     </>
   );

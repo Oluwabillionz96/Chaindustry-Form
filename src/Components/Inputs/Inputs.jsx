@@ -24,6 +24,7 @@ const Inputs = ({
         onChange={onChange}
         onKeyDown={handleKeypress}
         checked={check}
+        autoComplete="on"
       />
     </>
   );

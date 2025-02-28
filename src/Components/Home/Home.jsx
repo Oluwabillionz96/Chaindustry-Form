@@ -4,11 +4,11 @@ import "./home.css";
 import {
   LaptopAndComputerLiteracy,
   EmailAndName,
-  Last,
   PhoneAndPhoneNumber,
   MasterClasses,
   WhatsappAndTelegram,
   SocialMediaExposureAndSite,
+  Upload,
 } from "../InputFields/InputFields";
 import Absolute from "../Absolutes/Absolute";
 import { move } from "../Movements/movement";
@@ -29,18 +29,65 @@ const Home = () => {
     computerLiteracyLevel: "Basic Level",
     SocialMediaExposure: "Basic Level",
     site: "Onsite",
+    classes: [],
+    payment: "Yes",
+    image: "",
   });
+  const [loadinging, setLoading] = useState(false);
+  function handleCheck(e, warning) {
+    let next = [...userInfo.classes];
+    if (next.includes(e.target.value) === false) {
+      next = [...next, e.target.value];
+      warning.current.style.display = "none";
+    } else {
+      const index = next.indexOf(e.target.value);
+      next.splice(index, 1);
+      console.log(index);
+    }
+    setUserInfo({ ...userInfo, classes: next });
+  }
   const hidden1 = useRef(null);
   const hidden2 = useRef(null);
   const hidden3 = useRef(null);
   const hidden4 = useRef(null);
   const hidden5 = useRef(null);
+  const hidden6 = useRef(null);
+  async function handleFileUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    setLoading(true);
+    if (
+      file.type === "image/png" ||
+      file.type === "image/jpg" ||
+      file.type === "image/jpeg"
+    ) {
+      const data = new FormData();
+      data.append("file", file);
+      data.append("upload_preset", "chaindustry_form");
+      data.append("cloud_name", "dconfftvp");
+      const response = await fetch(
+        "https://api.cloudinary.com/v1_1/dconfftvp/image/upload",
+        {
+          method: "POST",
+          body: data,
+        }
+      );
+
+      const uploadedImageUrl = await response.json();
+      setUserInfo({ ...userInfo, image: uploadedImageUrl.url });
+      console.log(uploadedImageUrl);
+    } else {
+      alert("must be a png or jpg image");
+      console.log(file.type);
+    }
+    setLoading(false);
+  }
   const inputs = [
     <EmailAndName
       onChange1={(e) => {
         setUserInfo({
           ...userInfo,
-          email: changeTo(e).toLowerCase(),
+          email: changeTo(e),
         });
       }}
       value1={userInfo.email}
@@ -148,8 +195,24 @@ const Home = () => {
         setUserInfo({ ...userInfo, site: changeTo(e) });
       }}
     />,
-    <MasterClasses />,
-    <Last />,
+    <MasterClasses
+      arr={userInfo.classes}
+      onChange={(e) => handleCheck(e, hidden6)}
+      reff={hidden6}
+    />,
+    <Upload
+      loader={loadinging}
+      check1={userInfo.payment === "Yes"}
+      check2={userInfo.payment == "No"}
+      onChange1={(e) => {
+        setUserInfo({ ...userInfo, payment: changeTo(e) });
+      }}
+      onChange2={(e) => {
+        setUserInfo({ ...userInfo, payment: changeTo(e) });
+      }}
+      onChange3={handleFileUpload}
+      value1={userInfo.image}
+    />,
   ];
   const [next, setNext] = useState(0);
   const isEqual = next === inputs.length - 1;
@@ -160,6 +223,7 @@ const Home = () => {
     [userInfo.whatsappNumber, hidden4, userInfo.telegram, hidden5],
     [],
     [],
+    [userInfo.classes, hidden6],
   ];
 
   return (
@@ -169,34 +233,39 @@ const Home = () => {
       </div>
       <h1>Your Web3 With Chaindustry Academy Journey begins here</h1>
       <p className="details">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos,quas.
-        Perferendis earum corrupti eaque. Enim laborum quia iste, ea aspernatur
-        aut, voluptatum, velit reiciendis repellendus earum dolorem libero
+        Chaindustry Academy is making transformative learning experiences
+        accessible for everyone! Note that the Learn and Earn from Web3 training
+        with Chaindustry is a three to six months intensive training available
+        for only students that are willing to take the course onsite and online.
+        This opportunity is free and available for all to learn and pay when
+        they start earning.
       </p>
-      <form action="">
+      <form action="" className="flexs col">
         <div className="flexs col input-container" style={{ gap: "1.5rem" }}>
           {inputs[next]}
         </div>
         <div className="flexs" style={{ gap: "2rem" }}>
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              setNext(next - 1);
-            }}
-            disabled={lesser}
-          >
-            <i className="fa fa-arrow-left" aria-hidden="true"></i>
-          </button>
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              move[next](argu[next]) && setNext((next) => next + 1);
-              console.log(userInfo);
-            }}
-            disabled={isEqual}
-          >
-            <i className="fa fa-arrow-right" aria-hidden="true"></i>
-          </button>
+          <div className="btn-contain flexs">
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                setNext(next - 1);
+              }}
+              disabled={lesser}
+            >
+              <i className="fa fa-arrow-left" aria-hidden="true"></i>
+            </button>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                move[next](argu[next]) && setNext((next) => next + 1);
+                console.log(userInfo);
+              }}
+              disabled={isEqual}
+            >
+              <i className="fa fa-arrow-right" aria-hidden="true"></i>
+            </button>
+          </div>
         </div>
       </form>
       <Absolute />

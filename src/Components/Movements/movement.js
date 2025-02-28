@@ -1,20 +1,30 @@
+function block(inp) {
+  inp.current.style.display = "block";
+}
+
+function textContent(inp, content) {
+  inp.current.textContent = content;
+}
+
 function empty(value, toggle, reff, content) {
   if (value.length > 0) {
     toggle = true;
   } else {
-    reff.current.textContent = content;
-    reff.current.style.display = "block";
+    textContent(reff, content);
+    block(reff);
     toggle = false;
   }
   return toggle;
 }
 
+const message = "Field must not be empty";
+
 export const move = [
   function (arr) {
     let movement = false;
     if (
-      empty(arr[2], movement, arr[0], "Field must not be empty") &&
-      empty(arr[3], movement, arr[1], "Field must not be empty")
+      empty(arr[2], movement, arr[0], message) &&
+      empty(arr[3], movement, arr[1], message)
     ) {
       if (
         arr[2].includes("@") &&
@@ -24,8 +34,8 @@ export const move = [
         movement = true;
       } else {
         movement = false;
-        arr[0].current.textContent = "Email must be valid";
-        arr[0].current.style.display = "block";
+        textContent(arr[0], "Email must be valid");
+        block(arr[0]);
       }
     }
 
@@ -33,13 +43,15 @@ export const move = [
   },
   function (arr) {
     let movement = false;
-    if (empty(arr[1], movement, arr[0], "Field must not be empty")) {
+    if (empty(arr[1], movement, arr[0], message)) {
       if (arr[1].length === 11) {
         movement = true;
       } else {
-        arr[0].current.textContent =
-          "Numbers must not be greater or lesser than 11 digits";
-        arr[0].current.style.display = "block";
+        textContent(
+          arr[0],
+          "Numbers must not be greater or lesser than 11 digits"
+        );
+        block(arr[0]);
       }
     }
     return movement;
@@ -47,23 +59,25 @@ export const move = [
   function (arr) {
     let movement;
     if (
-      empty(arr[0], movement, arr[1], "Field cannot be empty") &&
-      empty(arr[2], movement, arr[3], "Field cannot be empty")
+      empty(arr[0], movement, arr[1], message) &&
+      empty(arr[2], movement, arr[3], message)
     ) {
       if (arr[0].length === 11) {
         movement = true;
       } else {
-        arr[1].current.textContent =
-          "Numbers must not be greater or lesser than 11 digits";
-        arr[1].current.style.display = "block";
+        textContent(
+          arr[1],
+          "Numbers must not be greater or lesser than 11 digits"
+        );
+        block(arr[1]);
       }
 
       if (arr[2].charAt(0) === "@") {
         movement = true;
       } else {
         movement = false;
-        arr[3].current.textContent = "This is not a valid Telegram username";
-        arr[3].current.style.display = "block";
+        textContent(arr[3], "This is not a valid Telegram username");
+        block(arr[3]);
       }
     }
     return movement;
@@ -73,5 +87,12 @@ export const move = [
   },
   function (arr) {
     return true;
+  },
+  function (arr) {
+    let movement = false;
+    if (empty(arr[0], movement, arr[1], "A box must be checked")) {
+      movement = true;
+    }
+    return movement;
   },
 ];
