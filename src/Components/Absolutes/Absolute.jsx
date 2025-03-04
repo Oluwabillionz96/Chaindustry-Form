@@ -2,6 +2,7 @@ import patternBottom from "../../assets/pattern-squiggly-line-bottom.svg";
 import patternTop from "../../assets/pattern-squiggly-line-Top.svg";
 import Lines from "../../assets/pattern-lines.svg";
 import circle from "../../assets/pattern-circle.svg";
+import "./absolutes.css";
 
 const Absolute = () => {
   return (
@@ -13,6 +14,12 @@ const Absolute = () => {
         <img src={patternTop} alt="squiggly pattern top" />
       </div>
       <div className="abs lines">
+        <img src={Lines} alt="lines" />
+      </div>
+      <div className="abs lines2">
+        <img src={Lines} alt="lines" />
+      </div>
+      <div className="abs lines3">
         <img src={Lines} alt="lines" />
       </div>
       <div className="abs circle-top">

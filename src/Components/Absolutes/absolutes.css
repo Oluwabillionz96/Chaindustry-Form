@@ -1,0 +1,90 @@
+.squiggly-bottom {
+  bottom: -1%;
+  z-index: -1;
+}
+
+.lines {
+  top: 0;
+  right: 0;
+  z-index: -1;
+}
+
+.squiggly-top {
+  top: 3rem;
+  right: 2rem;
+}
+
+.lines img {
+  height: 100vh;
+  width: 100vw;
+}
+
+.circle-top {
+  top: -5rem;
+}
+
+.lines2 {
+  top: 0;
+  left: -1rem;
+}
+
+.lines2 img {
+  width: 50vw;
+  clip-path: inset(0px 500px 0 0);
+}
+.lines3 {
+  top: 0;
+  right: -1rem;
+}
+
+.lines3 img {
+  width: 50vw;
+  clip-path: inset(0 0 0 500px);
+}
+
+.circle-mid {
+  top: 25rem;
+  right: 13rem;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .squiggly-bottom img,
+  .squiggly-top img,
+  .circle-top img {
+    width: 70%;
+  }
+
+  .circle-mid img {
+    width: 12rem;
+  }
+
+  .squiggly-top {
+    right: -8.5rem;
+  }
+
+  .lines {
+    top: -7rem;
+    left: 0;
+  }
+
+  .circle-mid {
+    left: 60%;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 768px) {
+  .squiggly-bottom img,
+  .squiggly-top img,
+  .lines img,
+  .circle-top img,
+  .lines2 img,
+  .lines3 img {
+    width: 60%;
+    display: none;
+  }
+
+  .circle-mid img {
+    width: 5rem;
+    display: none;
+  }
+}

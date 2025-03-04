@@ -6,15 +6,20 @@
 
 body {
   width: 100vw;
-  height: 130vh;
+  height: max(100vh, fit-content);
   overflow-x: hidden;
   background: url("./assets/background-desktop.png");
   background-repeat: no-repeat;
   background-position: 0%;
-  background-size: 100% 130%;
+  background-size: 100% fit-content;
   color: white;
   font-family: sans-serif;
   padding: 0 0 3rem;
+  padding-bottom: 5rem;
+}
+
+fieldset {
+  box-sizing: border-box;
 }
 
 .flexs {
@@ -36,7 +41,8 @@ body {
 }
 
 .abs {
-  position: absolute;
+  position: fixed;
+  z-index: -10;
 }
 
 button:hover {
@@ -45,4 +51,26 @@ button:hover {
 
 button:disabled {
   cursor: not-allowed;
+}
+
+.wrap {
+  flex-wrap: wrap-reverse;
+}
+
+.jis {
+  justify-content: start;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  body {
+    padding: 0 0 2rem;
+    background-image: url("./assets/background-tablet.png");
+  }
+}
+
+@media (max-width: 767px) {
+  body {
+    padding: 0 0 1rem;
+    background-image: url("./assets/background-mobile.png");
+  }
 }

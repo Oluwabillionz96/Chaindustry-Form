@@ -1,23 +1,128 @@
 import Inputs, { Label } from "../Inputs/Inputs";
 import uploadIcon from "../../assets/icon-upload.svg";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { Link } from "react-router-dom";
 
+const Multiple = ({
+  onChange1,
+  onChange2,
+  onChange3,
+  onChange4,
+  check1,
+  check2,
+  check3,
+  check4,
+  name,
+  inputName,
+}) => {
+  return (
+    <fieldset className="flexs jcs spc">
+      <legend>{name}</legend>
+      <div className="flexs radios">
+        <Inputs
+          type={"radio"}
+          name={inputName}
+          id={"isNovice"}
+          value={"Novice"}
+          onChange={onChange1}
+          check={check1}
+        />
+        <Label id={"isNovice"} name={"Novice"} />
+      </div>
+      <div className="flexs radios">
+        <Inputs
+          type={"radio"}
+          name={inputName}
+          id={"isBasic"}
+          value={"Basic Level"}
+          onChange={onChange2}
+          check={check2}
+        />
+        <Label id={"isBasic"} name={"Basic"} />
+      </div>
+      <div className="flexs radios">
+        <Inputs
+          type={"radio"}
+          name={inputName}
+          id={"isMid"}
+          value={"Mid-level"}
+          onChange={onChange3}
+          check={check3}
+        />
+        <Label id={"isMid"} name={"Mid"} />
+      </div>
+      <div className="flexs radios">
+        <Inputs
+          type={"radio"}
+          name={inputName}
+          id={"isExpert"}
+          value={"Expert"}
+          onChange={onChange4}
+          check={check4}
+        />
+        <Label id={"isExpert"} name={"Expert"} />
+      </div>
+    </fieldset>
+  );
+};
+
+const TwoOptions = ({
+  onChange1,
+  onChange2,
+  check1,
+  check2,
+  name,
+  inputName,
+  id1,
+  id2,
+  value1,
+  value2,
+  paddingTop,
+  height,
+}) => {
+  return (
+    <fieldset
+      className="flexs jcs"
+      style={{ paddingTop: paddingTop, height: height }}
+    >
+      <legend>{name}</legend>
+      <div className="flexs radios">
+        <Inputs
+          type={"radio"}
+          name={inputName}
+          id={id1}
+          value={value1}
+          onChange={onChange1}
+          check={check1}
+        />
+        <Label id={id1} name={value1} />
+      </div>
+      <div className="flexs radios">
+        <Inputs
+          type={"radio"}
+          name={inputName}
+          id={id2}
+          value={value2}
+          onChange={onChange2}
+          check={check2}
+        />
+        <Label id={id2} name={value2} />
+      </div>
+    </fieldset>
+  );
+};
+
 const masterClasses = [
-  [
-    { name: "Blogging and SEO", id: "Blogging-and-SEO" },
-    { name: "Data Ananlysis", id: "Data-Ananlysis" },
-    { name: "Video Editing", id: "Video-Editing" },
-    {
-      name: "BlockChain and Web Developemnt",
-      id: "BlockChain-and-Web-Developemnt",
-    },
-  ],
-  [
-    { name: "Trading and Investment", id: "Trading-and-Investment" },
-    { name: "UI/UX and Graphics Design", id: "UI/UX-and-Graphics-Design" },
-    { name: "Web2/Web3 Digital Marketing", id: "Web2/Web3-Digital Marketing" },
-  ],
+  { name: "Blogging and SEO", id: "Blogging-and-SEO" },
+  { name: "Data Ananlysis", id: "Data-Ananlysis" },
+  { name: "Video Editing", id: "Video-Editing" },
+  {
+    name: "BlockChain and Web Developemnt",
+    id: "BlockChain-and-Web-Developemnt",
+  },
+  { name: "Trading and Investment", id: "Trading-and-Investment" },
+  { name: "UI/UX and Graphics Design", id: "UI/UX-and-Graphics-Design" },
+  { name: "Web2/Web3 Digital Marketing", id: "Web2/Web3-Digital Marketing" },
 ];
 export const EmailAndName = ({
   onChange1,
@@ -31,7 +136,7 @@ export const EmailAndName = ({
 }) => {
   return (
     <>
-      <div className="flexs col ais " style={{ gap: "0.5rem" }}>
+      <div className="flexs col ais ">
         <Label id={"email"} name={"Email"} />
         <Inputs
           type={"email"}
@@ -41,13 +146,14 @@ export const EmailAndName = ({
           onChange={onChange1}
           value={value1}
           handleKeypress={press1}
+          // focus
         />
         <p className="emp" ref={reff1}></p>
       </div>
-      <div className="flexs col ais" style={{ gap: "0.5rem" }}>
+      <div className="flexs col ais">
         <Label id={"name"} name={"Full Name"} />
         <Inputs
-          type={"name"}
+          type={"text"}
           name={"name"}
           id={"name"}
           placeholder={"John Doe"}
@@ -73,32 +179,19 @@ export function PhoneAndPhoneNumber({
 }) {
   return (
     <>
-      <fieldset className="flexs jcs" style={{ gap: "2rem" }}>
-        <legend>Do You Have A Phone?</legend>
-        <div className="flexs" style={{ gap: "1rem" }}>
-          <Inputs
-            type={"radio"}
-            name={"Phone?"}
-            id={"YesPhone"}
-            value={"Yes"}
-            onChange={onChange1}
-            check={check}
-          />
-          <Label id={"yesPhone"} name={"Yes"} />
-        </div>
-        <div className="flexs" style={{ gap: "1rem" }}>
-          <Inputs
-            type={"radio"}
-            name={"Phone?"}
-            id={"NoPhone"}
-            value={"No"}
-            onChange={onChange2}
-            check={check2}
-          />
-          <Label id={"NoPhone"} name={"No"} />
-        </div>
-      </fieldset>
-      <div className="flexs col ais" style={{ gap: "0.5rem" }}>
+      <TwoOptions
+        onChange1={onChange1}
+        onChange2={onChange2}
+        check1={check}
+        check2={check2}
+        name={"Do You Have A Phone?"}
+        inputName={"phone"}
+        id1={"YesPhone"}
+        id2={"NoPhone"}
+        value1={"Yes"}
+        value2={"No"}
+      />
+      <div className="flexs col ais">
         <Label id={"number"} name={"Phone Number"} />
         <Inputs
           type={"number"}
@@ -109,6 +202,7 @@ export function PhoneAndPhoneNumber({
           value={value1}
           onChange={onChange3}
           handleKeypress={press}
+          focus
         />
         <p className="emp" ref={reff}></p>
       </div>
@@ -128,7 +222,7 @@ export function WhatsappAndTelegram({
 }) {
   return (
     <>
-      <div className="flexs col ais " style={{ gap: "0.5rem" }}>
+      <div className="flexs col ais ">
         <Label id={"whatsapp-number"} name={"Whatsapp Number"} />
         <Inputs
           type={"number"}
@@ -139,10 +233,11 @@ export function WhatsappAndTelegram({
           value={value1}
           onChange={onChange1}
           handleKeypress={press1}
+          focus
         />
         <p className="emp" ref={reff1}></p>
       </div>
-      <div className="flexs col ais" style={{ gap: "0.5rem" }}>
+      <div className="flexs col ais">
         <Label id={"telegram"} name={"Telegram Username"} />
         <Inputs
           type={"text"}
@@ -175,78 +270,30 @@ export function LaptopAndComputerLiteracy({
 }) {
   return (
     <>
-      <fieldset className="flexs jcs" style={{ gap: "2rem" }}>
-        <legend>Do You Have A Laptop?</legend>
-        <div className="flexs" style={{ gap: "1rem" }}>
-          <Inputs
-            type={"radio"}
-            name={"laptop?"}
-            id={"YesLaptop"}
-            value={"Yes"}
-            onChange={onChange1}
-            check={check1}
-          />
-          <Label id={"yesLaptop"} name={"Yes"} />
-        </div>
-        <div className="flexs" style={{ gap: "1rem" }}>
-          <Inputs
-            type={"radio"}
-            name={"laptop?"}
-            id={"NoLaptop"}
-            value={"No"}
-            onChange={onChange2}
-            check={check2}
-          />
-          <Label id={"NoLaptop"} name={"No"} />
-        </div>
-      </fieldset>
-      <fieldset className="flexs jcs" style={{ gap: "1.5rem" }}>
-        <legend>Computer Literacy Level</legend>
-        <div className="flexs" style={{ gap: "1rem" }}>
-          <Inputs
-            type={"radio"}
-            name={"Computer-Literacy"}
-            id={"isNovice"}
-            value={"Novice"}
-            onChange={onChange3}
-            check={check3}
-          />
-          <Label id={"isNovice"} name={"Novice"} />
-        </div>
-        <div className="flexs" style={{ gap: "1rem" }}>
-          <Inputs
-            type={"radio"}
-            name={"Computer-Literacy"}
-            id={"isBasic"}
-            value={"Basic Level"}
-            onChange={onChange4}
-            check={check4}
-          />
-          <Label id={"isBasic"} name={"Basic Level"} />
-        </div>
-        <div className="flexs" style={{ gap: "1rem" }}>
-          <Inputs
-            type={"radio"}
-            name={"Computer-Literacy"}
-            id={"isMid"}
-            value={"Mid-level"}
-            onChange={onChange5}
-            check={check5}
-          />
-          <Label id={"isMid"} name={"Mid-Level"} />
-        </div>
-        <div className="flexs" style={{ gap: "1rem" }}>
-          <Inputs
-            type={"radio"}
-            name={"Computer-Literacy"}
-            id={"isExpert"}
-            value={"Expert"}
-            onChange={onChange6}
-            check={check6}
-          />
-          <Label id={"isExpert"} name={"Expert"} />
-        </div>
-      </fieldset>
+      <TwoOptions
+        name={"Do You Have A Laptop?"}
+        inputName={"laptop"}
+        id1={"YesLaptop"}
+        id2={"NoLaptop"}
+        value1={"Yes"}
+        value2={"No"}
+        onChange1={onChange1}
+        onChange2={onChange2}
+        check1={check1}
+        check2={check2}
+      />
+      <Multiple
+        onChange1={onChange3}
+        onChange2={onChange4}
+        onChange3={onChange5}
+        onChange4={onChange6}
+        check1={check3}
+        check2={check4}
+        check3={check5}
+        check4={check6}
+        name={"Computer Literacy Level"}
+        inputName={"Computer-Literacy"}
+      />
     </>
   );
 }
@@ -266,78 +313,30 @@ export function SocialMediaExposureAndSite({
 }) {
   return (
     <>
-      <fieldset className="flexs jcs" style={{ gap: "1.5rem" }}>
-        <legend>Social Media and Internet activities exposure level</legend>
-        <div className="flexs" style={{ gap: "1rem" }}>
-          <Inputs
-            type={"radio"}
-            name={"internet-exposure-level"}
-            id={"isNovice"}
-            value={"Novice"}
-            onChange={onChange1}
-            check={check1}
-          />
-          <Label id={"isNovice"} name={"Novice"} />
-        </div>
-        <div className="flexs" style={{ gap: "1rem" }}>
-          <Inputs
-            type={"radio"}
-            name={"internet-exposure-level"}
-            id={"isBasic"}
-            value={"Basic Level"}
-            onChange={onChange2}
-            check={check2}
-          />
-          <Label id={"isBasic"} name={"Basic Level"} />
-        </div>
-        <div className="flexs" style={{ gap: "1rem" }}>
-          <Inputs
-            type={"radio"}
-            name={"internet-exposure-level"}
-            id={"isMid"}
-            value={"Mid-level"}
-            onChange={onChange3}
-            check={check3}
-          />
-          <Label id={"isMid"} name={"Mid-Level"} />
-        </div>
-        <div className="flexs" style={{ gap: "1rem" }}>
-          <Inputs
-            type={"radio"}
-            name={"internet-exposure-level"}
-            id={"isExpert"}
-            value={"Expert"}
-            onChange={onChange4}
-            check={check4}
-          />
-          <Label id={"isExpert"} name={"Expert"} />
-        </div>
-      </fieldset>
-      <fieldset className="flexs jcs" style={{ gap: "2rem" }}>
-        <legend>How do you prefer to undergo this traning?</legend>
-        <div className="flexs" style={{ gap: "1rem" }}>
-          <Inputs
-            type={"radio"}
-            name={"site-prefrence"}
-            id={"onsite"}
-            value={"Onsite"}
-            onChange={onChange5}
-            check={check5}
-          />
-          <Label id={"onsite"} name={"Onsite"} />
-        </div>
-        <div className="flexs" style={{ gap: "1rem" }}>
-          <Inputs
-            type={"radio"}
-            name={"site-prefrence"}
-            id={"online"}
-            value={"Online"}
-            onChange={onChange6}
-            check={check6}
-          />
-          <Label id={"online"} name={"Online"} />
-        </div>
-      </fieldset>
+      <Multiple
+        onChange1={onChange1}
+        onChange2={onChange2}
+        onChange3={onChange3}
+        onChange4={onChange4}
+        check1={check1}
+        check2={check2}
+        check3={check3}
+        check4={check4}
+        name={"Social Media and Internet activities exposure level"}
+        inputName={"Social-Media-Exposure-Level"}
+      />
+      <TwoOptions
+        name={"How do you prefer to undergo this traning?"}
+        inputName={"site-prefrence"}
+        id1={"onsite"}
+        id2={"online"}
+        value1={"Onsite"}
+        value2={"Online"}
+        onChange1={onChange5}
+        onChange2={onChange6}
+        check1={check5}
+        check2={check6}
+      />
     </>
   );
 }
@@ -358,48 +357,24 @@ function CheckBoxes({ name, id, onChange, check, value }) {
 }
 export function MasterClasses({ arr, onChange, reff }) {
   return (
-    <>
-      <div
-        className="flexs"
-        style={{ justifyContent: "space-around", width: "80%" }}
-      >
-        <div className="flexs col ais">
-          <ul style={{ listStyle: "none" }}>
-            {masterClasses[0].map((classes) => {
-              return (
-                <li key={classes.id}>
-                  <CheckBoxes
-                    name={classes.name}
-                    id={classes.id}
-                    value={classes.name}
-                    check={arr.includes(classes.name)}
-                    onChange={onChange}
-                  />
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-        <div className="flexs col ais">
-          <ul style={{ listStyle: "none" }}>
-            {masterClasses[1].map((classes) => {
-              return (
-                <li key={classes.id}>
-                  <CheckBoxes
-                    name={classes.name}
-                    id={classes.id}
-                    value={classes.name}
-                    check={arr.includes(classes.name)}
-                    onChange={onChange}
-                  />
-                </li>
-              );
-            })}
-          </ul>
-          <p className="emp" ref={reff}></p>
-        </div>
-      </div>
-    </>
+    <div className="flexs">
+      <ul style={{ listStyle: "none", flex: 1 }}>
+        {masterClasses.map((classes) => {
+          return (
+            <li key={classes.id}>
+              <CheckBoxes
+                name={classes.name}
+                id={classes.id}
+                value={classes.name}
+                check={arr.includes(classes.name)}
+                onChange={onChange}
+              />
+            </li>
+          );
+        })}
+      </ul>
+      <p className="emp checker" ref={reff}></p>
+    </div>
   );
 }
 export function Upload({
@@ -410,6 +385,8 @@ export function Upload({
   check2,
   value1,
   loader,
+  reff,
+  click,
 }) {
   const fileUpload = useRef(null);
   function handleClick() {
@@ -418,44 +395,26 @@ export function Upload({
     }
   }
 
-  function handleFileChange(event) {
-    const file = event.target.files[0];
-    if (!file) return;
-    console.log(file);
-  }
   return (
     <>
-      <fieldset className="flexs jcs last" style={{ gap: "2rem" }}>
-        <legend>
-          Are you willing to pay the tuition fee of $200 when you start earning
-          during and after your training?
-        </legend>
-        <div className="flexs" style={{ gap: "1rem" }}>
-          <Inputs
-            type={"radio"}
-            name={"pay$200?"}
-            id={"Yespay"}
-            value={"Yes"}
-            onChange={onChange1}
-            check={check1}
-          />
-          <Label id={"yespay"} name={"Yes"} />
-        </div>
-        <div className="flexs" style={{ gap: "1rem" }}>
-          <Inputs
-            type={"radio"}
-            name={"pay$200?"}
-            id={"NoPay"}
-            value={"No"}
-            onChange={onChange2}
-            check={check2}
-          />
-          <Label id={"NoPay"} name={"No"} />
-        </div>
-      </fieldset>
+      <TwoOptions
+        name={
+          "Are you willing to pay the tuition fee of $200 when you start earning during and after your training?"
+        }
+        inputName={"pay$200?"}
+        id1={"Yespay"}
+        id2={"NoPay"}
+        value1={"Yes"}
+        value2={"No"}
+        onChange1={onChange1}
+        onChange2={onChange2}
+        check1={check1}
+        check2={check2}
+        paddingTop={"0.5rem"}
+      />
       <div
         className="flexs col ais"
-        style={{ gap: "0.5rem", marginTop: "0.4rem" }}
+        style={{ marginTop: "0.4rem" }}
       >
         <Label
           id={"dashboard"}
@@ -468,26 +427,27 @@ export function Upload({
           ref={fileUpload}
           onChange={onChange3}
         />
-        <div
-          className="upload"
-          onClick={() => {
-            handleClick();
-          }}
-          style={{ position: "relative" }}
-        >
+        <div className="upload" style={{ position: "relative" }}>
           <div className={value1 ? "uploaded-image" : "upload-icon"}>
             {loader ? (
               "Uploading..."
             ) : (
-              <a href={value1 ? value1 : null} target={value1 && "blank"}>
-                <img
-                  src={value1 ? value1 : uploadIcon}
-                  alt={value1 ? "uploaded image" : "upload icon"}
-                  onClick={(e) => {
-                    value1 && e.stopPropagation();
-                  }}
-                />
-              </a>
+              <>
+                {value1 ? (
+                  <a href={value1} target={value1 && "blank"}>
+                    <img src={value1} alt="uploaded image" />
+                  </a>
+                ) : (
+                  <img
+                    src={uploadIcon}
+                    alt="upload icon"
+                    onClick={() => {
+                      handleClick();
+                      click();
+                    }}
+                  />
+                )}
+              </>
             )}
           </div>
           <p className="drag-and-drop" style={{ display: value1 && "none" }}>
@@ -495,7 +455,19 @@ export function Upload({
           </p>
         </div>
         <Link to="/account"> What is a ChaindustryAccount?</Link>
+        <p className="emp" ref={reff}></p>
       </div>
+    </>
+  );
+}
+
+export function SubmitOrClear({ onclick2 }) {
+  return (
+    <>
+      <Inputs type="submit" />
+      <button id="clear" onClick={onclick2}>
+        Clear Form
+      </button>
     </>
   );
 }

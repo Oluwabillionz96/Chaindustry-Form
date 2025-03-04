@@ -46,29 +46,29 @@ export const move = [
     if (empty(arr[1], movement, arr[0], message)) {
       if (arr[1].length === 11) {
         movement = true;
-      } else {
-        textContent(
-          arr[0],
-          "Numbers must not be greater or lesser than 11 digits"
-        );
+      } else if (arr[1].length > 11) {
+        textContent(arr[0], "Numbers must not be greater than 11 digits");
+        block(arr[0]);
+      } else if (arr[1].length < 11) {
+        textContent(arr[0], "Numbers must not be less than 11 digits");
         block(arr[0]);
       }
     }
     return movement;
   },
   function (arr) {
-    let movement;
+    let movement = false;
     if (
       empty(arr[0], movement, arr[1], message) &&
       empty(arr[2], movement, arr[3], message)
     ) {
       if (arr[0].length === 11) {
         movement = true;
-      } else {
-        textContent(
-          arr[1],
-          "Numbers must not be greater or lesser than 11 digits"
-        );
+      } else if (arr[0].length > 11) {
+        textContent(arr[1], "Numbers must not be greater than 11 digits");
+        block(arr[1]);
+      } else if (arr[0].length < 11) {
+        textContent(arr[1], "Numbers must not be less than 11 digits");
         block(arr[1]);
       }
 
@@ -91,6 +91,14 @@ export const move = [
   function (arr) {
     let movement = false;
     if (empty(arr[0], movement, arr[1], "A box must be checked")) {
+      movement = true;
+    }
+    return movement;
+  },
+  function (arr) {
+    let movement = false;
+
+    if (empty(arr[0], movement, arr[1], "File must be uploaded")) {
       movement = true;
     }
     return movement;

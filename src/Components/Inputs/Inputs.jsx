@@ -9,9 +9,9 @@ const Inputs = ({
   onChange,
   handleKeypress,
   check,
+  focus,
 }) => {
   return (
-    <>
       <input
         type={type}
         name={name}
@@ -25,8 +25,8 @@ const Inputs = ({
         onKeyDown={handleKeypress}
         checked={check}
         autoComplete="on"
+        autoFocus={focus}
       />
-    </>
   );
 };
 

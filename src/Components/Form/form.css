@@ -1,0 +1,266 @@
+form {
+  width: 63.1%;
+  margin: 0 auto;
+  height: min(fit-content, 22.5rem);
+}
+
+.input-container {
+  width: 100%;
+  height: 100%;
+}
+
+.input-container > div {
+  width: 68%;
+  gap: 0.5rem;
+}
+
+.input-container label {
+  font-size: 1.25rem;
+}
+
+.input-container input,
+fieldset {
+  width: 100%;
+  height: 3rem;
+  border-radius: 10px;
+  border: 1px solid #9a9a9a;
+  background-color: #191635;
+  color: white;
+  font-size: 1.25rem;
+  padding: 0 1rem;
+}
+
+.input-container input[type="text"]:focus,
+.input-container input[type="number"]:focus,
+.input-container input[type="email"]:focus {
+  outline: 2px white;
+  outline-style: double;
+}
+
+
+
+.input-container > fieldset {
+  width: 68%;
+  gap: 2rem;
+}
+
+.radios {
+  gap: 1rem;
+}
+
+.input-container > .spc {
+  gap: 1.5rem;
+}
+
+fieldset {
+  height: 6rem;
+  padding: 0 2rem;
+}
+
+form .flexs button {
+  width: 5rem;
+  height: 3.125rem;
+  border-radius: 10px;
+  font-size: 1.5rem;
+  border: none;
+  color: #291451;
+  background-color: #e25f81;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.btn-contain {
+  position: absolute;
+  bottom: -10rem;
+  gap: 2rem;
+  width: 100%;
+}
+
+form .flexs button:disabled {
+  background-color: #fbaec3;
+}
+
+.upload {
+  width: 38.625rem;
+  height: 13rem;
+  border: 2px dashed white;
+  border-radius: 10px;
+  background-color: #191635;
+}
+
+.upload-icon {
+  width: fit-content;
+  padding: 0.5rem;
+  background-color: #4b486a;
+  margin: 1rem auto;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 3rem;
+}
+
+.drag-and-drop {
+  color: hsl(252, 6%, 83%);
+  text-align: center;
+}
+
+.emp {
+  color: rgb(250, 89, 89);
+  display: none;
+}
+
+.last {
+  font-size: 1rem;
+}
+
+.uploaded-image img {
+  width: 50%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto;
+}
+
+input[type="radio"] {
+  width: 1.5rem;
+}
+
+input[type="checkbox"] {
+  width: 20px;
+}
+
+input[type="checkbox"]:hover,
+input[type="radio"]:hover {
+  cursor: pointer;
+}
+
+input[type="file"] {
+  border: none;
+  display: none;
+}
+
+input[type="submit"],
+#clear {
+  width: 68%;
+  height: 3.5rem;
+  color: #291451;
+  background-color: #e25f81;
+  font-size: 1.5rem;
+}
+
+input[type="submit"]:hover {
+  background-color: rgb(17, 143, 17);
+  color: white;
+  cursor: pointer;
+  padding: 0;
+  text-align: center;
+}
+
+#clear:hover {
+  background-color: rgb(255, 0, 0);
+  color: white;
+}
+
+#clear {
+  margin: 1rem 0;
+  background-color: #291451;
+  color: #e25f81;
+}
+
+.checker {
+  position: absolute;
+  bottom: -1rem;
+  left: 40%;
+  font-size: 0.8rem;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  form {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .input-container label {
+    font-size: 1.25rem;
+  }
+
+  .input-container > div {
+    width: 70%;
+  }
+
+  .input-container > fieldset {
+    width: 70%;
+    gap: 1.4rem;
+    flex-direction: column;
+    height: fit-content;
+    align-items: start;
+  }
+
+  .radios {
+    gap: 0.7rem;
+  }
+
+  .input-container > .spc {
+    gap: 1.4rem;
+  }
+
+  fieldset {
+    padding: 0 1.4rem;
+  }
+
+  .upload {
+    width: 100%;
+  }
+
+  input[type="radio"] {
+    width: 1rem;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 767px) {
+  form {
+    width: 99%;
+  }
+
+  .input-container label {
+    font-size: 1rem;
+  }
+
+  .input-container > div {
+    width: 90%;
+  }
+
+  .input-container > fieldset {
+    width: 90%;
+    gap: 0.8rem;
+    height: fit-content;
+    flex-direction: column;
+    align-items: start;
+  }
+
+  .radios {
+    gap: 0.3rem;
+  }
+
+  .input-container > .spc {
+    gap: 0.7rem;
+  }
+
+  .upload {
+    width: 100%;
+  }
+
+  input[type="radio"] {
+    width: 1rem;
+  }
+
+  legend {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .input-container input,
+  fieldset {
+    font-size: 1rem;
+    padding: 0 0.5rem;
+  }
+}

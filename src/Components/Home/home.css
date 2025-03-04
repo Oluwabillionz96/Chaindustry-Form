@@ -5,162 +5,69 @@ main {
 .logo {
   display: block;
   margin: 0 auto;
+  width: 26.5%;
 }
 
 h1 {
   text-align: center;
   width: 38.625rem;
+  width: 42.9%;
   margin: 0 auto 3rem;
 }
 
 .details {
   font-size: 1.25rem;
-  width: 38.75rem;
+  width: 42.9%;
   margin: 0 auto 2rem;
   line-height: 2rem;
 }
 
-form {
-  width: 56.75rem;
-  margin: 0 auto;
-  height: 22.5rem;
+.details::selection,
+label::selection,
+legend::selection,
+input::selection {
+  background-color: #281351;
+  color: #c0716a;
 }
 
-.input-container {
-  width: 100%;
-  height: 100%;
+input:focus input::placeholder {
+  background-color: red;
 }
 
-.input-container label {
-  font-size: 1.25rem;
+@media (min-width: 768px) and (max-width: 1024px) {
+  .logo {
+    width: 35%;
+  }
+
+  h1 {
+    width: 53.6%;
+    margin: 0 auto 2rem;
+    font-size: 1.4rem;
+    line-height: 1.4;
+  }
+
+  .details {
+    font-size: 1.25rem;
+    width: 53.6%;
+    line-height: 1.7;
+  }
 }
 
-.input-container input,
-fieldset {
-  width: 38.625rem;
-  height: 3rem;
-  border-radius: 10px;
-  border: 1px solid #fff;
-  background-color: transparent;
-  color: white;
-  font-size: 1.25rem;
-  padding: 0 1rem;
-}
+@media (max-width: 767px) {
+  .logo {
+    width: 50%;
+  }
 
-fieldset {
-  height: 5.4rem;
-  padding: 0 2rem;
-}
+  h1 {
+    width: 90%;
+    margin: 0 auto 2rem;
+    font-size: 1.2rem;
+    line-height: 1.2;
+  }
 
-form .flexs button {
-  width: 5rem;
-  height: 3.125rem;
-  border-radius: 10px;
-  font-size: 1.5rem;
-  border: none;
-  color: #291451;
-  background-color: #e25f81;
-  margin-top: 2.5rem;
-}
-
-.btn-contain {
-  position: absolute;
-  bottom: -5rem;
-  gap: 2rem;
-  width: 100%;
-}
-
-form .flexs button:disabled {
-  background-color: #fbaec3;
-}
-
-main .squiggly-bottom {
-  bottom: -8rem;
-  z-index: -1;
-}
-
-main .squiggly-top {
-  top: 0;
-  right: 0;
-}
-
-main .lines {
-  top: 0;
-  left: 0;
-  z-index: -1;
-}
-
-main .lines img {
-  height: 100vh;
-  width: 100vw;
-}
-
-main .circle-top {
-  top: -6rem;
-}
-
-main .circle-mid {
-  top: 25rem;
-  right: 13rem;
-}
-
-input[type="radio"] {
-  width: 1.5rem;
-}
-
-input[type="checkbox"] {
-  width: 20px;
-}
-
-input[type="file"] {
-  border: none;
-  display: none;
-}
-
-.upload {
-  width: 38.625rem;
-  height: 13rem;
-  border: 2px dashed white;
-}
-
-.upload-icon {
-  width: fit-content;
-  padding: 0.5rem;
-  background-color: #4b486a;
-  margin: 1rem auto;
-  border-radius: 10px;
-  cursor: pointer;
-}
-
-.drag-and-drop {
-  color: hsl(252, 6%, 83%);
-  text-align: center;
-}
-
-.emp {
-  color: rgb(250, 89, 89);
-  display: none;
-}
-
-.last {
-  /* height: 6rem;
-  margin-top: 7rem; */
-  font-size: 1rem;
-}
-
-.uploaded-image img {
-  width: 50%;
-  height: 12.8rem;
-  object-fit: cover;
-  display: block;
-  margin: 0 auto;
-}
-
-.upload .changes {
-  position: absolute;
-  width: 6rem;
-  height: 3rem;
-  font-size: 1.3rem;
-  right: 5%;
-  bottom: 5%;
+  .details {
+    font-size: 1rem;
+    width: 90%;
+    line-height: 1.5;
+  }
 }

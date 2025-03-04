@@ -1,0 +1,15 @@
+div.buttons > .link > button {
+  width: 43%;
+  height: 3rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.link {
+  width: 100%;
+  text-decoration: none;
+}
+
+div.buttons {
+  gap: 1.5rem;
+}
