@@ -86,6 +86,7 @@ form .flexs button:disabled {
   border: 2px dashed white;
   border-radius: 10px;
   background-color: #191635;
+  overflow: hidden;
 }
 
 .upload-icon {
