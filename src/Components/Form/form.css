@@ -18,6 +18,31 @@ form {
   font-size: 1.25rem;
 }
 
+.modal {
+  width: 90%;
+  height: 60%;
+  top: 50%;
+  z-index: 50;
+  box-shadow: 10px 10px 10px black, -10px 10px 10px black;
+  position: absolute;
+  background-color: #191635;
+  border-radius: 20px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  display: none;
+  font-size: 2rem;
+}
+
+.modal>button {
+  background-color: transparent;
+  width: 300px;
+}
+
+.modal img {
+  width: 50%;
+}
+
 .input-container input,
 fieldset {
   width: 100%;
@@ -113,10 +138,15 @@ form .flexs button:disabled {
 
 .uploaded-image img {
   width: 50%;
-  height: 100%;
   object-fit: cover;
   display: block;
-  margin: 0 auto;
+}
+
+.uploaded-image {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 input[type="radio"] {

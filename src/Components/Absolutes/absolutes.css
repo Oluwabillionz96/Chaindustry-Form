@@ -73,18 +73,34 @@
 }
 
 @media (min-width: 320px) and (max-width: 768px) {
-  .squiggly-bottom img,
-  .squiggly-top img,
-  .lines img,
-  .circle-top img,
-  .lines2 img,
-  .lines3 img {
+  .squiggly-bottom img {
     width: 60%;
+  }
+
+  .squiggly-top img,
+  .circle-top img,
+  .circle-mid img {
+    width: 100%;
+  }
+
+  .squiggly-top {
+    width: 50%;
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+
+  .lines,
+  .lines2,
+  .lines3 {
     display: none;
   }
 
-  .circle-mid img {
-    width: 5rem;
-    display: none;
+  .circle-top {
+    width: 50%;
+  }
+
+  .circle-mid {
+    width: 30%;
+    left: 60%;
   }
 }

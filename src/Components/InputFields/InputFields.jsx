@@ -390,6 +390,7 @@ export function Upload({
   click,
 }) {
   const fileUpload = useRef(null);
+  const modal = useRef(null);
   function handleClick() {
     if (fileUpload.current) {
       fileUpload.current.click();
@@ -432,9 +433,33 @@ export function Upload({
             ) : (
               <>
                 {value1 ? (
-                  <a href={value1} target={value1 && "blank"}>
-                    <img src={value1} alt="uploaded image" />
-                  </a>
+                  <>
+                    <img
+                      src={value1}
+                      alt="uploaded image"
+                      onClick={() => {
+                        modal.current.style.display = "grid";
+                      }}
+                    />
+                    <button
+                      style={{
+                        position: "absolute",
+                        width: "30%",
+                        height: 40,
+                        fontSize: "1rem",
+                        right: "0.5rem",
+                        bottom: "-2rem",
+                        boxShadow:
+                          "-10px 10px 10px black, 10px 10px 10px black ",
+                      }}
+                      onClick={() => {
+                        handleClick();
+                        click();
+                      }}
+                    >
+                      Change
+                    </button>
+                  </>
                 ) : (
                   <img
                     src={uploadIcon}
@@ -454,6 +479,23 @@ export function Upload({
         </div>
         <Link to="/account"> What is a ChaindustryAccount?</Link>
         <p className="emp" ref={reff}></p>
+      </div>
+      <div ref={modal} className="modal">
+        <img src={value1} alt="uploaded image" />
+        <button
+          style={{
+            color: "white",
+            position: "absolute",
+            top: "0rem",
+            right: "0rem",
+            backgroundColor: "transparent",
+          }}
+          onClick={() => {
+            modal.current.style.display = "none";
+          }}
+        >
+          <i className="fa fa-times" aria-hidden="true"></i>
+        </button>
       </div>
     </>
   );
