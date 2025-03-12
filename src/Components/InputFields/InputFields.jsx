@@ -357,7 +357,8 @@ function CheckBoxes({ name, id, onChange, check, value }) {
 }
 export function MasterClasses({ arr, onChange, reff }) {
   return (
-    <div className="flexs">
+    <fieldset style={{ height: "fit-content" }}>
+      <legend>What Master classes would you like to attend</legend>
       <ul style={{ listStyle: "none", flex: 1 }}>
         {masterClasses.map((classes) => {
           return (
@@ -374,7 +375,7 @@ export function MasterClasses({ arr, onChange, reff }) {
         })}
       </ul>
       <p className="emp checker" ref={reff}></p>
-    </div>
+    </fieldset>
   );
 }
 export function Upload({
@@ -412,10 +413,7 @@ export function Upload({
         check2={check2}
         paddingTop={"0.5rem"}
       />
-      <div
-        className="flexs col ais"
-        style={{ marginTop: "0.4rem" }}
-      >
+      <div className="flexs col ais" style={{ marginTop: "0.4rem" }}>
         <Label
           id={"dashboard"}
           name={"upload a screenshot of your Chaindustry account Dashboard"}
