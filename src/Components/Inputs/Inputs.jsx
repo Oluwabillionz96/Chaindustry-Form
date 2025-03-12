@@ -25,7 +25,7 @@ const Inputs = ({
         onKeyDown={handleKeypress}
         checked={check}
         autoComplete="on"
-        autoFocus={focus}
+      autoFocus={focus}
       />
   );
 };

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   LaptopAndComputerLiteracy,
   EmailAndName,
@@ -33,7 +33,9 @@ const info = {
 };
 
 const Form = () => {
-  const [userInfo, setUserInfo] = useState(info);
+  const [userInfo, setUserInfo] = useState(
+    JSON.parse(sessionStorage.getItem("userInfo")) || info
+  );
   const [loadinging, setLoading] = useState(false);
   function handleCheck(e, warning) {
     let next = [...userInfo.classes];
@@ -69,20 +71,33 @@ const Form = () => {
       data.append("file", file);
       data.append("upload_preset", "chaindustry_form");
       data.append("cloud_name", "dconfftvp");
-      const response = await fetch(
-        "https://api.cloudinary.com/v1_1/dconfftvp/image/upload",
-        {
-          method: "POST",
-          body: data,
-        }
-      );
+      try {
+        const response = await fetch(
+          "https://api.cloudinary.com/v1_1/dconfftvp/image/upload",
+          {
+            method: "POST",
+            body: data,
+          }
+        );
 
-      const uploadedImageUrl = await response.json();
-      setUserInfo({ ...userInfo, image: uploadedImageUrl.url });
-      console.log(uploadedImageUrl);
+        if (!response.ok) {
+          throw new Error(`${response.status}: error`);
+        }
+
+        const uploadedImageUrl = await response.json();
+        setUserInfo({ ...userInfo, image: uploadedImageUrl.url });
+        console.log(uploadedImageUrl);
+      } catch (err) {
+        console.error(err.message);
+        hidden7.current.style.display = "block";
+        hidden7.current.textContent =
+          "Network error: check your internet connection";
+        console.log(file.size / 1024 / 1024);
+      }
     } else {
-      alert("must be a png or jpg image");
-      console.log(file.type);
+      hidden7.current.style.display = "block";
+      hidden7.current.textContent = "file must be a png or jpg image";
+      console.log(file);
     }
     setLoading(false);
   }
@@ -225,11 +240,17 @@ const Form = () => {
     <SubmitOrClear
       onclick2={() => {
         window.location.reload();
+        sessionStorage.clear();
         setUserInfo(info);
       }}
     />,
   ];
-  const [next, setNext] = useState(0);
+  const [next, setNext] = useState(
+    Number(sessionStorage.getItem("index")) || 0
+  );
+  useEffect(() => {
+    sessionStorage.setItem("index", next.toString());
+  }, [next]);
   const isEqual = next === inputs.length - 1;
   const lesser = next === 0;
   const argu = [
@@ -260,8 +281,8 @@ const Form = () => {
           <button
             onClick={(e) => {
               e.preventDefault();
+              sessionStorage.setItem("userInfo", JSON.stringify(userInfo));
               move[next](argu[next]) && setNext((next) => next + 1);
-              console.log(userInfo);
             }}
             disabled={isEqual}
           >
