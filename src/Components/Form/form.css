@@ -37,8 +37,6 @@ fieldset {
   outline-style: double;
 }
 
-
-
 .input-container > fieldset {
   width: 68%;
   gap: 2rem;
@@ -149,16 +147,16 @@ input[type="submit"],
 }
 
 input[type="submit"]:hover {
-  background-color: rgb(17, 143, 17);
-  color: white;
+  background-color: #ff4274;
+  color: #1b093d;
   cursor: pointer;
   padding: 0;
   text-align: center;
 }
 
 #clear:hover {
-  background-color: rgb(255, 0, 0);
-  color: white;
+  background-color: #1b093d;
+  color: #ff4274;
 }
 
 #clear {
@@ -263,5 +261,11 @@ input[type="submit"]:hover {
   fieldset {
     font-size: 1rem;
     padding: 0 0.5rem;
+  }
+
+  input[type="submit"],
+  #clear {
+    width: 90%;
+    font-size: 1rem;
   }
 }
