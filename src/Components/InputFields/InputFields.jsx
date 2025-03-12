@@ -437,7 +437,8 @@ export function Upload({
                     <img
                       src={value1}
                       alt="uploaded image"
-                      onClick={() => {
+                      onClick={(e) => {
+                        e.stopPropagation();
                         modal.current.style.display = "grid";
                       }}
                     />
