@@ -1,5 +1,5 @@
 import patternBottom from "../../assets/pattern-squiggly-line-bottom.svg";
-import patternTop from "../../assets/pattern-squiggly-line-Top.svg";
+import patternTop from "../../assets/pattern-squiggly-line-top.svg";
 import Lines from "../../assets/pattern-lines.svg";
 import circle from "../../assets/pattern-circle.svg";
 import "./absolutes.css";
