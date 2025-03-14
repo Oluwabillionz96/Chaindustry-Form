@@ -87,7 +87,7 @@ const Form = () => {
 
         const uploadedImageUrl = await response.json();
         setUserInfo({ ...userInfo, image: uploadedImageUrl.url });
-        console.log(uploadedImageUrl);
+        // console.log(uploadedImageUrl);
       } catch (err) {
         console.error(err.message);
         hidden7.current.style.display = "block";

@@ -451,8 +451,7 @@ export function Upload({
                     <img
                       src={value1}
                       alt="uploaded image"
-                      onClick={(e) => {
-                        e.stopPropagation();
+                      onClick={() => {
                         setShowModal(true);
                       }}
                     />
@@ -467,7 +466,8 @@ export function Upload({
                         boxShadow:
                           "-10px 10px 10px black, 10px 10px 10px black ",
                       }}
-                      onClick={() => {
+                      onClick={(e) => {
+                        e.preventDefault();
                         handleClick();
                         click();
                       }}
@@ -488,9 +488,11 @@ export function Upload({
               </>
             )}
           </div>
-          <p className="drag-and-drop" style={{ display: value1 && "none" }}>
-            Drag and drop or click to upload
-          </p>
+          {!loader && (
+            <p className="drag-and-drop" style={{ display: value1 && "none" }}>
+              Drag and drop or click to upload
+            </p>
+          )}
         </div>
         <Link to="/account"> What is a ChaindustryAccount?</Link>
         <p className="emp" ref={reff}></p>
@@ -498,14 +500,7 @@ export function Upload({
       {showModal && (
         <div className="modal">
           <img src={value1 || null} alt="uploaded image" />
-          <button
-            style={{
-              color: "white",
-              position: "absolute",
-              top: "0rem",
-              right: "0rem",
-              backgroundColor: "transparent",
-            }}
+          <button id="modal-button"
             onClick={() => {
               setShowModal(false);
             }}
