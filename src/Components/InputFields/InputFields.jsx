@@ -500,7 +500,8 @@ export function Upload({
       {showModal && (
         <div className="modal">
           <img src={value1 || null} alt="uploaded image" />
-          <button id="modal-button"
+          <button
+            id="modal-button"
             onClick={() => {
               setShowModal(false);
             }}
@@ -516,8 +517,14 @@ export function Upload({
 export function SubmitOrClear({ onclick2 }) {
   return (
     <>
-      <Inputs type="submit" />
-      <button id="clear" onClick={onclick2}>
+      <input type="submit" />
+      <button
+        id="clear"
+        type="button"
+        onClick={() => {
+          onclick2();
+        }}
+      >
         Clear Form
       </button>
     </>

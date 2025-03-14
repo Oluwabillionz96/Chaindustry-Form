@@ -280,8 +280,9 @@ const Form = () => {
       <div className="flexs" style={{ gap: "2rem" }}>
         <div className="btn-contain flexs">
           <button
+            type="button"
             onClick={(e) => {
-              e.preventDefault();
+              // e.preventDefault();
               setNext(next - 1);
             }}
             disabled={lesser}
@@ -289,6 +290,7 @@ const Form = () => {
             <i className="fa fa-arrow-left" aria-hidden="true"></i>
           </button>
           <button
+            type="button"
             onClick={(e) => {
               e.preventDefault();
               sessionStorage.setItem("userInfo", JSON.stringify(userInfo));
