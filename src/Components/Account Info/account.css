@@ -13,3 +13,32 @@ div.buttons > .link > button {
 div.buttons {
   gap: 1.5rem;
 }
+
+div.buttons button {
+  color: #291451;
+  background-color: #e25f81;
+  font-size: 1.5rem;
+  border: none;
+}
+
+div.buttons .link:nth-child(2) button {
+  background-color: #291451;
+  color: #e25f81;
+  border: none;
+}
+
+div.buttons button:hover {
+  background-color: #ff4274;
+  color: #1b093d;
+}
+
+div.buttons .link:nth-child(2) button:hover {
+  background-color: #1b093d;
+  color: #ff4274;
+}
+
+@media (min-width: 320px) and (max-width: 767px) {
+  div.buttons .link button {
+    width: 90%;
+  }
+}

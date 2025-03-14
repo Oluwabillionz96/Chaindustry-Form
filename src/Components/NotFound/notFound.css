@@ -1,0 +1,51 @@
+.not-found-container {
+  display: grid;
+  place-items: center;
+  height: 90vh;
+}
+
+.not-found-container h1 {
+  font-size: 5rem;
+  font-weight: bolder;
+  color: #e25f81;
+}
+
+.back {
+  height: 42px;
+  width: 146px;
+  gap: 0.5rem;
+  font-size: 1.5rem;
+  border: none;
+  border-bottom: 2px solid #e25f81;
+  background-color: transparent;
+  color: #e25f81;
+  margin-top: 2rem;
+}
+
+.link {
+  text-decoration: none;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .not-found-container img[alt="404 illustraion image"] {
+    transform: scale(0.8);
+  }
+
+  .not-found-container h1 {
+    font-size: 4rem;
+  }
+
+  .back {
+    font-size: 1.2rem;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 767px) {
+  .not-found-container img[alt="404 illustraion image"] {
+    transform: scale(0.7);
+  }
+
+  .not-found-container h1 {
+    font-size: 2.5rem;
+  }
+}

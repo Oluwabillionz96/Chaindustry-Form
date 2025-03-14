@@ -1,6 +1,6 @@
 import Inputs, { Label } from "../Inputs/Inputs";
 import uploadIcon from "../../assets/icon-upload.svg";
-import { useRef } from "react";
+import { Fragment, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 const Multiple = ({
@@ -390,7 +390,8 @@ export function Upload({
   click,
 }) {
   const fileUpload = useRef(null);
-  const modal = useRef(null);
+  const [showModal, setShowModal] = useState(false);
+  const [dragOver, setDragOver] = useState(false);
   function handleClick() {
     if (fileUpload.current) {
       fileUpload.current.click();
@@ -425,8 +426,21 @@ export function Upload({
           id={"dashboard"}
           ref={fileUpload}
           onChange={onChange3}
+          focus={false}
         />
-        <div className="upload" style={{ position: "relative" }}>
+        <div
+          className="upload"
+          style={{ position: "relative" }}
+          onDragOver={(e) => {
+            e.preventDefault();
+            setDragOver(true);
+            console.log(dragOver);
+          }}
+          onDrop={(e) => {
+            e.preventDefault();
+            console.log(fileUpload.current);
+          }}
+        >
           <div className={value1 ? "uploaded-image" : "upload-icon"}>
             {loader ? (
               "Uploading..."
@@ -439,7 +453,7 @@ export function Upload({
                       alt="uploaded image"
                       onClick={(e) => {
                         e.stopPropagation();
-                        modal.current.style.display = "grid";
+                        setShowModal(true);
                       }}
                     />
                     <button
@@ -481,23 +495,25 @@ export function Upload({
         <Link to="/account"> What is a ChaindustryAccount?</Link>
         <p className="emp" ref={reff}></p>
       </div>
-      <div ref={modal} className="modal">
-        <img src={value1} alt="uploaded image" />
-        <button
-          style={{
-            color: "white",
-            position: "absolute",
-            top: "0rem",
-            right: "0rem",
-            backgroundColor: "transparent",
-          }}
-          onClick={() => {
-            modal.current.style.display = "none";
-          }}
-        >
-          <i className="fa fa-times" aria-hidden="true"></i>
-        </button>
-      </div>
+      {showModal && (
+        <div className="modal">
+          <img src={value1 || null} alt="uploaded image" />
+          <button
+            style={{
+              color: "white",
+              position: "absolute",
+              top: "0rem",
+              right: "0rem",
+              backgroundColor: "transparent",
+            }}
+            onClick={() => {
+              setShowModal(false);
+            }}
+          >
+            <i className="fa fa-times" aria-hidden="true"></i>
+          </button>
+        </div>
+      )}
     </>
   );
 }

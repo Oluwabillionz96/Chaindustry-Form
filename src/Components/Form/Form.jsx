@@ -264,7 +264,16 @@ const Form = () => {
     [userInfo.image, hidden7],
   ];
   return (
-    <form action="" className="flexs col">
+    <form
+      action=""
+      className="flexs col"
+      onKeyDown={(e) => {
+        if (e.key.toLowerCase() === "enter") {
+          e.preventDefault();
+          move[next](argu[next]) && setNext((next) => next + 1);
+        }
+      }}
+    >
       <div className="flexs col input-container" style={{ gap: "1.5rem" }}>
         {inputs[next]}
       </div>
