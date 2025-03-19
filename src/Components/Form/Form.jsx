@@ -327,10 +327,10 @@ const Form = () => {
           }}
         />
       ) : status === "failed" ? (
-        <div className="modal">
+        <div className="modal status flexs">
           <h1>Failed</h1>
           <button
-            id="modal-button"
+            id="btnn"
             onClick={() => {
               setStatus("typing");
             }}

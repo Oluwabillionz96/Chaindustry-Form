@@ -33,7 +33,8 @@ form {
   font-size: 2rem;
 }
 
-#modal-button {
+#modal-button,
+.status #btnn {
   color: white;
   position: absolute;
   top: 0rem;
