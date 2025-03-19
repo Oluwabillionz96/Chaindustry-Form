@@ -318,7 +318,7 @@ const Form = () => {
       ) : status === "submitted" ? (
         <Successful
           click={() => {
-            sessionStorage.clear();
+            sessionStorage.setitem("index", "0");
             window.location.reload();
           }}
           reload={() => {
