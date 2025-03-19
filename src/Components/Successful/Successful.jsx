@@ -16,7 +16,8 @@ const Successful = ({ click, reload }) => {
         <button
           type="button"
           id="modal-button"
-          onClick={() => {
+                  onClick={() => {
+              console.log("Clicked on modal buttons")
             click();
           }}
         >
