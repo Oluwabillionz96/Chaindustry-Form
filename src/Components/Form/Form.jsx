@@ -318,8 +318,6 @@ const Form = () => {
       ) : status === "submitted" ? (
         <Successful
           click={() => {
-            setStatus("typing");
-            setUserInfo("info");
             sessionStorage.clear();
             window.location.reload();
           }}
