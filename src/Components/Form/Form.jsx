@@ -290,6 +290,8 @@ const Form = () => {
       if (data.message === "Registration successful") {
         setStatus("submitted");
         console.log("Successfull");
+      } else {
+        setStatus("failed");
       }
       console.log("Response: ", data);
     } catch (error) {
