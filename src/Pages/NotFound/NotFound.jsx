@@ -1,5 +1,5 @@
 import React from "react";
-import Absolute from "../Absolutes/Absolute";
+import Absolute from "../../Components/Absolutes/Absolute";
 import "./notFound.css";
 import { Link } from "react-router-dom";
 import illustration from "../../assets/404-illustration.svg";

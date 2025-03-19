@@ -1,8 +1,8 @@
 import React from "react";
-import Home from "./Components/Home/Home";
 import { Route, Routes } from "react-router-dom";
-import AccountInfo from "./Components/Account Info/AccountInfo";
-import NotFound from "./Components/NotFound/NotFound";
+import NotFound from "./Pages/NotFound/NotFound";
+import Home from "./Pages/Home/Home";
+import AccountInfo from "./Pages/Account Info/AccountInfo";
 
 const App = () => {
   return (

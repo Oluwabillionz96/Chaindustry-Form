@@ -1,4 +1,4 @@
-import Absolute from "../Absolutes/Absolute";
+import Absolute from "../../Components/Absolutes/Absolute";
 import logo from "../../assets/logo.svg";
 import "./account.css";
 import { Link } from "react-router-dom";

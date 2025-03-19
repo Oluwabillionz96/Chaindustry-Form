@@ -1,7 +1,7 @@
 import logo from "../../assets/logo.svg";
 import "./home.css";
-import Absolute from "../Absolutes/Absolute";
-import Form from "../Form/Form";
+import Absolute from "../../Components/Absolutes/Absolute";
+import Form from "../../Components/Form/Form";
 
 const Home = () => {
   return (

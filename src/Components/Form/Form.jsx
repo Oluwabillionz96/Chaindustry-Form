@@ -263,9 +263,32 @@ const Form = () => {
     [userInfo.classes, hidden6],
     [userInfo.image, hidden7],
   ];
+
+  async function submit(e) {
+    e.preventDefault();
+
+    const formData = userInfo;
+
+    try {
+      const response = await fetch(
+        "https://chaindustry-form-backend.onrender.com/register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
+
+      const data = await response.json();
+      console.log("Response: ", data);
+    } catch (error) {
+      console.error("Error: ", error);
+    }
+  }
   return (
     <form
-      action=""
       className="flexs col"
       onKeyDown={(e) => {
         if (e.key.toLowerCase() === "enter") {
@@ -273,6 +296,7 @@ const Form = () => {
           move[next](argu[next]) && setNext((next) => next + 1);
         }
       }}
+      onSubmit={submit}
     >
       <div className="flexs col input-container" style={{ gap: "1.5rem" }}>
         {inputs[next]}
