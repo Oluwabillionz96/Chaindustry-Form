@@ -13,7 +13,12 @@ const Successful = ({ click, reload }) => {
           width={"10%"}
         />
         <h1>Successful</h1>
-        <button id="modal-button" onClick={click()}>
+        <button
+          id="modal-button"
+          onClick={() => {
+            click();
+          }}
+        >
           <i className="fa fa-times" aria-hidden="true"></i>
         </button>
       </div>
