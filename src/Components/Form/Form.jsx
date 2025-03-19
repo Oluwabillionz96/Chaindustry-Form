@@ -11,6 +11,7 @@ import {
 } from "../InputFields/InputFields";
 import { move } from "../Movements/movement";
 import "./form.css";
+import Successful from "../Successful/Successful";
 
 function changeTo(e) {
   return e.target.value;
@@ -37,6 +38,7 @@ const Form = () => {
     JSON.parse(sessionStorage.getItem("userInfo")) || info
   );
   const [loadinging, setLoading] = useState(false);
+  const [status, setStatus] = useState("filling");
   function handleCheck(e, warning) {
     let next = [...userInfo.classes];
     if (next.includes(e.target.value) === false) {
@@ -269,6 +271,7 @@ const Form = () => {
 
     const formData = userInfo;
 
+    setStatus("Submitting");
     try {
       const response = await fetch(
         "https://chaindustry-form-backend.onrender.com/register",
@@ -280,11 +283,16 @@ const Form = () => {
           body: JSON.stringify(formData),
         }
       );
-
       const data = await response.json();
+      if (data.message === "Registration successful") {
+        setStatus("submitted");
+        console.log("Successfull");
+      }
       console.log("Response: ", data);
     } catch (error) {
       console.error("Error: ", error);
+      setStatus("Submitting");
+      setStatus("failed");
     }
   }
   return (
@@ -298,6 +306,28 @@ const Form = () => {
       }}
       onSubmit={submit}
     >
+      {status === "Submitting" ? (
+        <div className="modal">
+          <h1>Submitting...</h1>
+        </div>
+      ) : status === "submitted" ? (
+        <Successful
+          click={() => {
+            setStatus("typing");
+            setUserInfo("info");
+            sessionStorage.clear();
+            window.location.reload();
+          }}
+          reload={() => {
+            setStatus("typing");
+            setUserInfo("info");
+          }}
+        />
+      ) : status === "failed" ? (
+        <div className="modal">
+          <h1>Failed</h1>
+        </div>
+      ) : null}
       <div className="flexs col input-container" style={{ gap: "1.5rem" }}>
         {inputs[next]}
       </div>
