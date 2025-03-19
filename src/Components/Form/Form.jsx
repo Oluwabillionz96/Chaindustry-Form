@@ -326,6 +326,14 @@ const Form = () => {
       ) : status === "failed" ? (
         <div className="modal">
           <h1>Failed</h1>
+          <button
+            id="modal-button"
+            onClick={() => {
+              setStatus("typing");
+            }}
+          >
+            <i className="fa fa-times" aria-hidden="true"></i>
+          </button>
         </div>
       ) : null}
       <div className="flexs col input-container" style={{ gap: "1.5rem" }}>
