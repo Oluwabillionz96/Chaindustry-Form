@@ -14,6 +14,7 @@ const Successful = ({ click, reload }) => {
         />
         <h1>Successful</h1>
         <button
+          type="button"
           id="modal-button"
           onClick={() => {
             click();
