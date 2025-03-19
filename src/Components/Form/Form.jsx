@@ -38,7 +38,6 @@ const Form = () => {
     JSON.parse(sessionStorage.getItem("userInfo")) || info
   );
   const [loadinging, setLoading] = useState(false);
-  const [status, setStatus] = useState("filling");
   function handleCheck(e, warning) {
     let next = [...userInfo.classes];
     if (next.includes(e.target.value) === false) {
@@ -251,9 +250,13 @@ const Form = () => {
   const [next, setNext] = useState(
     Number(sessionStorage.getItem("index")) || 0
   );
+  const [status, setStatus] = useState(
+    sessionStorage.getItem("Status") || "typing"
+  );
   useEffect(() => {
     sessionStorage.setItem("index", next.toString());
-  }, [next]);
+    sessionStorage.setItem("Status", status);
+  }, [next, status]);
   const isEqual = next === inputs.length - 1;
   const lesser = next === 0;
   const argu = [
