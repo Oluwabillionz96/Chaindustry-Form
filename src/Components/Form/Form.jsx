@@ -318,13 +318,11 @@ const Form = () => {
       ) : status === "submitted" ? (
         <Successful
           click={() => {
-            sessionStorage.setitem("index", "0");
-            window.location.reload();
-          }}
-          reload={() => {
+            setNext(0);
             setStatus("typing");
-            setUserInfo("info");
+            setUserInfo(info);
           }}
+       
         />
       ) : status === "failed" ? (
         <div className="modal status flexs">

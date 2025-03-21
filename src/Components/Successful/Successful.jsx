@@ -3,7 +3,7 @@ import doneIcon from "../../assets/tick-inside-circle.png";
 import telegram from "../../assets/telegram.png";
 import "./successful.css";
 
-const Successful = ({ click, reload }) => {
+const Successful = ({ click }) => {
   return (
     <section className="flexs col successful-modal abs">
       <div className="flexs col">
@@ -16,8 +16,8 @@ const Successful = ({ click, reload }) => {
         <button
           type="button"
           id="modal-button"
-                  onClick={() => {
-              console.log("Clicked on modal buttons")
+          onClick={() => {
+            console.log("Clicked on modal buttons");
             click();
           }}
         >
@@ -33,7 +33,7 @@ const Successful = ({ click, reload }) => {
             id="sucessful-button"
             onClick={() => {
               sessionStorage.clear();
-              reload();
+              click();
             }}
           >
             <img src={telegram} alt="Telegram icon" />
