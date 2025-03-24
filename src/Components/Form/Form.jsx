@@ -50,6 +50,7 @@ const Form = () => {
     }
     setUserInfo({ ...userInfo, classes: next });
   }
+  const [dragOver, setDragOver] = useState(false);
 
   const hidden1 = useRef(null);
   const hidden2 = useRef(null);
@@ -59,8 +60,7 @@ const Form = () => {
   const hidden6 = useRef(null);
   const hidden7 = useRef(null);
 
-  async function handleFileUpload(event) {
-    const file = event.target.files[0];
+  async function uploader(file) {
     if (!file) return;
     setLoading(true);
     if (
@@ -102,6 +102,17 @@ const Form = () => {
       console.log(file);
     }
     setLoading(false);
+  }
+
+  function handleFileUpload(event) {
+    const file = event.target.files[0];
+    uploader(file);
+  }
+
+  async function draggedfile(e) {
+    const file = e.dataTransfer.files[0];
+    uploader(file);
+    console.log(file);
   }
 
   const inputs = [
@@ -238,6 +249,9 @@ const Form = () => {
       click={() => {
         hidden7.current.style.display = "none";
       }}
+      handleFile={draggedfile}
+      dragOver={dragOver}
+      setDragOver={setDragOver}
     />,
     <SubmitOrClear
       onclick2={() => {
@@ -310,6 +324,7 @@ const Form = () => {
         }
       }}
       onSubmit={submit}
+      onDragOver={() => setDragOver(false)}
     >
       {status === "Submitting" ? (
         <div className="modal">
@@ -322,7 +337,6 @@ const Form = () => {
             setStatus("typing");
             setUserInfo(info);
           }}
-       
         />
       ) : status === "failed" ? (
         <div className="modal status flexs">

@@ -378,6 +378,25 @@ export function MasterClasses({ arr, onChange, reff }) {
     </fieldset>
   );
 }
+
+function Icons({ click, handleClick, dragOver }) {
+  return (
+    <>
+      {!dragOver ? (
+        <img
+          src={uploadIcon}
+          alt="upload icon"
+          onClick={() => {
+            handleClick();
+            click();
+          }}
+        />
+      ) : (
+        <i class="fa fa-plus plus-icon" aria-hidden="true"></i>
+      )}
+    </>
+  );
+}
 export function Upload({
   onChange1,
   onChange2,
@@ -388,10 +407,12 @@ export function Upload({
   loader,
   reff,
   click,
+  handleFile,
+  dragOver,
+  setDragOver,
 }) {
   const fileUpload = useRef(null);
   const [showModal, setShowModal] = useState(false);
-  const [dragOver, setDragOver] = useState(false);
   function handleClick() {
     if (fileUpload.current) {
       fileUpload.current.click();
@@ -433,12 +454,12 @@ export function Upload({
           style={{ position: "relative" }}
           onDragOver={(e) => {
             e.preventDefault();
+            e.stopPropagation();
             setDragOver(true);
-            console.log(dragOver);
           }}
           onDrop={(e) => {
             e.preventDefault();
-            console.log(fileUpload.current);
+            handleFile(e);
           }}
         >
           <div className={value1 ? "uploaded-image" : "upload-icon"}>
@@ -476,13 +497,10 @@ export function Upload({
                     </button>
                   </>
                 ) : (
-                  <img
-                    src={uploadIcon}
-                    alt="upload icon"
-                    onClick={() => {
-                      handleClick();
-                      click();
-                    }}
+                  <Icons
+                    click={click}
+                    handleClick={handleClick}
+                    dragOver={dragOver}
                   />
                 )}
               </>
@@ -490,7 +508,9 @@ export function Upload({
           </div>
           {!loader && (
             <p className="drag-and-drop" style={{ display: value1 && "none" }}>
-              Drag and drop or click to upload
+              {!dragOver
+                ? "Drag and drop or click to upload"
+                : "Drop To Upload"}
             </p>
           )}
         </div>

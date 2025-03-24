@@ -18,6 +18,10 @@ form {
   font-size: 1.25rem;
 }
 
+.plus-icon {
+  font-size: 5rem;
+}
+
 .modal {
   width: 90%;
   height: 60%;
