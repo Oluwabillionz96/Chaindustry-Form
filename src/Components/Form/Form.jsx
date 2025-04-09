@@ -34,7 +34,6 @@ const Form = () => {
     } else {
       const index = next.indexOf(e.target.value);
       next.splice(index, 1);
-      console.log(index);
     }
   }
   const [dragOver, setDragOver] = useState(false);
@@ -78,18 +77,15 @@ const Form = () => {
           type: "set_image",
           image: uploadedImageUrl.url,
         });
-        console.log(uploadedImageUrl);
       } catch (err) {
         console.error(err.message);
         hidden7.current.style.display = "block";
         hidden7.current.textContent =
           "Network error: check your internet connection";
-        console.log(file.size / 1024 / 1024);
       }
     } else {
       hidden7.current.style.display = "block";
       hidden7.current.textContent = "file must be a png or jpg image";
-      console.log(file);
     }
     setLoading(false);
   }
@@ -102,7 +98,6 @@ const Form = () => {
   async function draggedfile(e) {
     const file = e.dataTransfer.files[0];
     uploader(file);
-    console.log(file);
   }
 
   const inputs = [
@@ -358,7 +353,6 @@ const Form = () => {
       const data = await response.json();
       if (data.message === "Registration successful") {
         setStatus("submitted");
-        console.log("Successfull");
       } else {
         setStatus("failed");
       }
@@ -417,6 +411,7 @@ const Form = () => {
             type="button"
             onClick={() => {
               setNext(next - 1);
+              sessionStorage.setItem("userInfo", JSON.stringify(userInfo));
             }}
             disabled={lesser}
           >
@@ -425,7 +420,6 @@ const Form = () => {
           <button
             type="button"
             onClick={(e) => {
-              e.preventDefault();
               sessionStorage.setItem("userInfo", JSON.stringify(userInfo));
               move[next](argu[next]) && setNext((next) => next + 1);
             }}
