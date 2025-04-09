@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useReducer, useRef, useState } from "react";
 import {
   LaptopAndComputerLiteracy,
   EmailAndName,
@@ -12,43 +12,30 @@ import {
 import { move } from "../Movements/movement";
 import "./form.css";
 import Successful from "../Successful/Successful";
+import formReducer, { info } from "./formReducer";
 
 function changeTo(e) {
   return e.target.value;
 }
 
-const info = {
-  name: "",
-  email: "",
-  phone: "Yes",
-  phoneNumber: "",
-  whatsappNumber: "",
-  telegram: "",
-  laptop: "Yes",
-  computerLiteracyLevel: "Basic Level",
-  SocialMediaExposure: "Basic Level",
-  site: "Onsite",
-  classes: [],
-  payment: "Yes",
-  image: "",
-};
-
 const Form = () => {
-  const [userInfo, setUserInfo] = useState(
+  const [userInfo, dispatch] = useReducer(
+    formReducer,
     JSON.parse(sessionStorage.getItem("userInfo")) || info
   );
   const [loadinging, setLoading] = useState(false);
+
   function handleCheck(e, warning) {
     let next = [...userInfo.classes];
     if (next.includes(e.target.value) === false) {
       next = [...next, e.target.value];
       warning.current.style.display = "none";
+      return next;
     } else {
       const index = next.indexOf(e.target.value);
       next.splice(index, 1);
       console.log(index);
     }
-    setUserInfo({ ...userInfo, classes: next });
   }
   const [dragOver, setDragOver] = useState(false);
 
@@ -87,8 +74,11 @@ const Form = () => {
         }
 
         const uploadedImageUrl = await response.json();
-        setUserInfo({ ...userInfo, image: uploadedImageUrl.url });
-        // console.log(uploadedImageUrl);
+        dispatch({
+          type: "set_image",
+          image: uploadedImageUrl.url,
+        });
+        console.log(uploadedImageUrl);
       } catch (err) {
         console.error(err.message);
         hidden7.current.style.display = "block";
@@ -104,8 +94,8 @@ const Form = () => {
     setLoading(false);
   }
 
-  function handleFileUpload(event) {
-    const file = event.target.files[0];
+  function handleFileUpload(e) {
+    const file = e.target.files[0];
     uploader(file);
   }
 
@@ -118,15 +108,15 @@ const Form = () => {
   const inputs = [
     <EmailAndName
       onChange1={(e) => {
-        setUserInfo({
-          ...userInfo,
+        dispatch({
+          type: "set_email",
           email: changeTo(e),
         });
       }}
       value1={userInfo.email}
       onChange2={(e) => {
-        setUserInfo({
-          ...userInfo,
+        dispatch({
+          type: "set_name",
           name: changeTo(e),
         });
       }}
@@ -145,14 +135,23 @@ const Form = () => {
       check={userInfo.phone === "Yes"}
       check2={userInfo.phone === "No"}
       onChange1={(e) => {
-        setUserInfo({ ...userInfo, phone: changeTo(e) });
+        dispatch({
+          type: "set_phone",
+          phone: changeTo(e),
+        });
       }}
       onChange2={(e) => {
-        setUserInfo({ ...userInfo, phone: changeTo(e) });
+        dispatch({
+          type: "set_phone2",
+          phone: changeTo(e),
+        });
       }}
       value1={userInfo.phoneNumber}
       onChange3={(e) => {
-        setUserInfo({ ...userInfo, phoneNumber: changeTo(e) });
+        dispatch({
+          type: "set_phoneNumber",
+          phoneNumber: changeTo(e),
+        });
       }}
       press={() => {
         hidden3.current.style.display = "none";
@@ -162,10 +161,16 @@ const Form = () => {
       reff1={hidden4}
       reff2={hidden5}
       onChange1={(e) => {
-        setUserInfo({ ...userInfo, whatsappNumber: changeTo(e) });
+        dispatch({
+          type: "set_whatsappNumber",
+          whatsappNumber: changeTo(e),
+        });
       }}
       onChange2={(e) => {
-        setUserInfo({ ...userInfo, telegram: changeTo(e) });
+        dispatch({
+          type: "set_telegram",
+          telegram: changeTo(e),
+        });
       }}
       press1={() => {
         hidden4.current.style.display = "none";
@@ -184,22 +189,41 @@ const Form = () => {
       check5={userInfo.computerLiteracyLevel === "Mid-level"}
       check6={userInfo.computerLiteracyLevel === "Expert"}
       onChange1={(e) => {
-        setUserInfo({ ...userInfo, laptop: changeTo(e) });
+        // setUserInfo({ ...userInfo, laptop: changeTo(e) });
+        dispatch({
+          type: "set_laptop",
+          laptop: changeTo(e),
+        });
       }}
       onChange2={(e) => {
-        setUserInfo({ ...userInfo, laptop: changeTo(e) });
+        dispatch({
+          type: "set_laptop",
+          laptop: changeTo(e),
+        });
       }}
       onChange3={(e) => {
-        setUserInfo({ ...userInfo, computerLiteracyLevel: changeTo(e) });
+        dispatch({
+          type: "set_computerLiteracyLevel",
+          computerLiteracyLevel: changeTo(e),
+        });
       }}
       onChange4={(e) => {
-        setUserInfo({ ...userInfo, computerLiteracyLevel: changeTo(e) });
+        dispatch({
+          type: "set_computerLiteracyLevel",
+          computerLiteracyLevel: changeTo(e),
+        });
       }}
       onChange5={(e) => {
-        setUserInfo({ ...userInfo, computerLiteracyLevel: changeTo(e) });
+        dispatch({
+          type: "set_computerLiteracyLevel",
+          computerLiteracyLevel: changeTo(e),
+        });
       }}
       onChange6={(e) => {
-        setUserInfo({ ...userInfo, computerLiteracyLevel: changeTo(e) });
+        dispatch({
+          type: "set_computerLiteracyLevel",
+          computerLiteracyLevel: changeTo(e),
+        });
       }}
     />,
     <SocialMediaExposureAndSite
@@ -210,27 +234,50 @@ const Form = () => {
       check5={userInfo.site === "Onsite"}
       check6={userInfo.site === "Online"}
       onChange1={(e) => {
-        setUserInfo({ ...userInfo, SocialMediaExposure: changeTo(e) });
+        dispatch({
+          type: "set_SocialMediaExposure",
+          SocialMediaExposure: changeTo(e),
+        });
       }}
       onChange2={(e) => {
-        setUserInfo({ ...userInfo, SocialMediaExposure: changeTo(e) });
+        dispatch({
+          type: "set_SocialMediaExposure",
+          SocialMediaExposure: changeTo(e),
+        });
       }}
       onChange3={(e) => {
-        setUserInfo({ ...userInfo, SocialMediaExposure: changeTo(e) });
+        dispatch({
+          type: "set_SocialMediaExposure",
+          SocialMediaExposure: changeTo(e),
+        });
       }}
       onChange4={(e) => {
-        setUserInfo({ ...userInfo, SocialMediaExposure: changeTo(e) });
+        dispatch({
+          type: "set_SocialMediaExposure",
+          SocialMediaExposure: changeTo(e),
+        });
       }}
       onChange5={(e) => {
-        setUserInfo({ ...userInfo, site: changeTo(e) });
+        dispatch({
+          type: "set_site",
+          site: changeTo(e),
+        });
       }}
       onChange6={(e) => {
-        setUserInfo({ ...userInfo, site: changeTo(e) });
+        dispatch({
+          type: "set_site",
+          site: changeTo(e),
+        });
       }}
     />,
     <MasterClasses
       arr={userInfo.classes}
-      onChange={(e) => handleCheck(e, hidden6)}
+      onChange={(e) => {
+        dispatch({
+          type: "set_classes",
+          classes: handleCheck(e, hidden6),
+        });
+      }}
       reff={hidden6}
     />,
     <Upload
@@ -238,10 +285,16 @@ const Form = () => {
       check1={userInfo.payment === "Yes"}
       check2={userInfo.payment == "No"}
       onChange1={(e) => {
-        setUserInfo({ ...userInfo, payment: changeTo(e) });
+        dispatch({
+          type: "set_payment",
+          payment: changeTo(e),
+        });
       }}
       onChange2={(e) => {
-        setUserInfo({ ...userInfo, payment: changeTo(e) });
+        dispatch({
+          type: "set_payment",
+          payment: changeTo(e),
+        });
       }}
       onChange3={handleFileUpload}
       value1={userInfo.image}
@@ -257,7 +310,9 @@ const Form = () => {
       onclick2={() => {
         window.location.reload();
         sessionStorage.clear();
-        setUserInfo(info);
+        dispatch({
+          type: "reset",
+        });
       }}
     />,
   ];
@@ -335,7 +390,9 @@ const Form = () => {
           click={() => {
             setNext(0);
             setStatus("typing");
-            setUserInfo(info);
+            dispatch({
+              type: "reset",
+            });
           }}
         />
       ) : status === "failed" ? (
@@ -358,8 +415,7 @@ const Form = () => {
         <div className="btn-contain flexs">
           <button
             type="button"
-            onClick={(e) => {
-              // e.preventDefault();
+            onClick={() => {
               setNext(next - 1);
             }}
             disabled={lesser}
